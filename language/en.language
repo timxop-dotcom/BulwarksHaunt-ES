@@ -1,0 +1,90 @@
+{
+	"strings": {
+		"MAP_BULWARKSHAUNT_GHOSTWAVE_NAME": "Hidden Realm: A Moment, Haunted",
+		"MAP_BULWARKSHAUNT_GHOSTWAVE_SUBTITLE": "",
+		"MAP_BULWARKSHAUNT_GHOSTWAVE_LORE": "What happens when someone dies?\r\n\r\nSome say that their soul ascends to afterlife and lives a happy life among the stars. Some even believe that the birth of a new star is related to the leaving of the spirit of the deceased. Such heartwarming, wishful thinking in rough times.\r\n\r\nSome say that absolutely nothing happens, and that person is just... gone. Forever. And that's it. No spirits, no souls, no hope. A dreadful thought, isn't it?\r\n\r\nBut what is more dreadful is the idea of wandering spirits. The idea that, when someone dies, their soul lives on and does not leave this world, forced to watch the world and grieve. And the longer their stay, the stronger the pain.\r\n\r\nWhat monstrous thoughts could be going through the minds of the thousand-year-old phantoms? What would they do if given a physical body?",
+		"BAZAAR_SEER_BULWARKSHAUNT_GHOSTWAVE": "<style=cWorldEvent>You experience a bloodcurdling nightmare.</style>",
+		"UNLOCKABLE_LOG_STAGES_BULWARKSHAUNT_GHOSTWAVE": "Environment Log: A Moment, Haunted",
+
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_CLEARWAVES": "Clear <color=#ff6a07>Wave {0}...</color>",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_CLEARWAVES_FINAL": "Clear the <color=#ff6a07>Final Wave!</color>",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_KILLENEMIES": "Defeat the <color=#ff6a07><link=\"BulwarksHauntWavy\">Resurgent Spirits</link></color> ({0}%)",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_WAITFORNEXTWAVE": "Next Wave in <color=#ff6a07>{0}</color>",
+
+		"ITEM_BULWARKSHAUNT_SWORD_NAME": "Crystalline Blade",
+		"ITEM_BULWARKSHAUNT_SWORD_PICKUP": "Voices echo through your mind, whispering: <link=\"BulwarksHauntWavy\">\"the Obelisk... the Obelisk...\"</link>",
+		"ITEM_BULWARKSHAUNT_SWORD_DESC": "Voices echo through your mind, whispering: <link=\"BulwarksHauntWavy\">\"the Obelisk... the Obelisk...\"</link>",
+		"ITEM_BULWARKSHAUNT_SWORD_LORE": "<style=cMono>PLAYING TRANSLATED AUDIO...</style>\r\n\r\n\"But it's so boring here... Can I go play instead?\"\r\n\r\n\"Shush, you! This is a rare occasion. Once in every 50 lunar cycles, when the Moon gets closest to the meadow, He descends from the realm beyond and blesses us with protection. HE, who created this world for us in the first place! Be grateful!\"\r\n\r\n\"Wait, He? You mean...\"\r\n\r\n\"Yes.\"\r\n\r\n\"Wow...\"\r\n\r\n\"And if we don't respect this tradition, and, in turn, don't respect Him, calamities are bound to taint our land, Demons will come down from above, and... they will... we will...\"\r\n\r\n\"...\"\r\n\r\n\"Well... It would be bad. Er, I mean... Listen. Don't think about it too much.\"\r\n\r\n\"...\"\r\n\r\n\"I'm sorry. I'm very, very sorry. Please, don't cry.\"\r\n\r\n<style=cMono>END OF TRANSLATED AUDIO</style>",
+
+		"BODY_MODIFIER_BULWARKSHAUNT_GHOSTFURY": "Ghost of {0}",
+
+		"BULWARKSHAUNT_SWORDOBJ_NAME": "Bulwark's Grave",
+		"BULWARKSHAUNT_SWORDOBJ_CONTEXT": "Defile",
+
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVECLEAR": "<style=cStack>(Wave complete! +{0} Lunar Coins.)</style>",
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVEFALLBACK": "<style=cStack>(You killed no enemies on stage {0}. Adding random enemy ghosts instead...)</style>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_VOICE_FORMAT": "<color=#ffcdc6><size=120%>???: {0}</color></size>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_1": "You... <link=\"BulwarksHauntShaky\">monster...</link>",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_2": "You, whose kin invades our home... You, who relentlessly murders the innocent...",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_3": "<link=\"BulwarksHauntShaky\">YOU</link>, who finds joy in bringing suffering...",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_4": "...shall now face the consequences of your actions.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_5": "Every single creature you have killed... Every single soul you have hurt...",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_6": "Shall <link=\"BulwarksHauntShaky\">torture</link> your spirit.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_7": "I shall not intervene, as I dare not take away their pleasure.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_1": "Murderer. Parasite. PEST. Lowly <link=\"BulwarksHauntShaky\">vermin.</link>",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_2": "You have got nerve coming into our plane... The higher plane.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_3": "I do not tolerate intruders, and neither do the souls of those whose lives you have taken.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_4": "Every single one of them has been eagerly waiting for you to get punished.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_5": "And the time for retribution is now. Pay your price, <link=\"BulwarksHauntShaky\">monster.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_1": "Your arrival here is... unexpected.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_2": "It is also very welcome, however.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_3": "As the ghosts of those who you have killed have been yearning to take revenge.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_4": "<link=\"BulwarksHauntShaky\">Every single one of them</link> was waiting so long for you to die.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_5": "And it appears that your time to die is <link=\"BulwarksHauntShaky\">now</link>, monster.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_1": "What is the purpose of your arrival?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_2": "Have you come to fuel your bloodlust?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_3": "Do you find this fun?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_4": "... I did not expect a different answer.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_5": "As it is clear you have a twisted mind.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_6": "A rotten being of soul.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_7": "Truly, you are no better than <link=\"BulwarksHauntShaky\">him.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_1": "What causes you to commit such cruelties?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_2": "Is it the abundance of soul in your body?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_3": "... or a lack thereof?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_4": "What a peculiar kind you are.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_5": "It is a shame I did not live to see the rest of you.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_6": "Though, perhaps, it is for the best.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_7": "I would rather die a warrior than die from <link=\"BulwarksHauntShaky\">disgust.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_1": "Think about them for a moment.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_2": "They used to live perfect lives.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_3": "They had friends. They had families.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_4": "They had the gift of life.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_5": "Just like you.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_6": "What made you think you could take it away from them?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_7": "What made you think you are <link=\"BulwarksHauntShaky\">above them?</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_1_1": "Horrifying.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_1_2": "Your brutality knows no bounds.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_1_3": "<link=\"BulwarksHauntShaky\">You will make a wonderful wisp...</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_2_1": "What scorching, fiery, hateful spirit.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_2_2": "It would be only fitting...",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_2_3": "<link=\"BulwarksHauntShaky\">... to turn you into one.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_3_1": "You have killed them all - again.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_3_2": "I sense that you are expecting a reward for your sinful actions.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_3_3": "<link=\"BulwarksHauntShaky\">Here. You will become one with the wisps.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_1": "At last.",
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_2": "Farewell, monster.",
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_3": "A fraction of pain you have inflicted.",
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_4": "Die - in your gilded casket."
+	}
+}

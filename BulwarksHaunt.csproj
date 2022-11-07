@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="BepInEx.Core" Version="5.4.19" />
+    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.4-r.0" />
+    <PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MMHOOK_RoR2">
+      <HintPath>..\..\..\..\Risk of Rain 2\Modding References\MMHOOK_RoR2.dll</HintPath>
+    </Reference>
+    <Reference Include="MoonstormSharedUtils">
+      <HintPath>..\..\..\..\Risk of Rain 2\Modding References\MoonstormSharedUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="MysticsRisky2Utils">
+      <HintPath>..\..\..\..\Risk of Rain 2\Modding References\MysticsRisky2Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API">
+      <HintPath>..\..\..\..\Risk of Rain 2\Modding References\R2API.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>..\..\..\..\Risk of Rain 2\Modding References\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
