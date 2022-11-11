@@ -667,7 +667,13 @@ namespace BulwarksHaunt
             newEnemySpawnCard.equipmentToGrant = new EquipmentDef[] { };
             if (killedEnemyData.equipment != null)
                 HG.ArrayUtils.ArrayAppend(ref newEnemySpawnCard.equipmentToGrant, killedEnemyData.equipment);
-            newEnemySpawnCard.nodeGraphType = bodyComponent.isFlying ? MapNodeGroup.GraphType.Air : MapNodeGroup.GraphType.Ground;
+
+            newEnemySpawnCard.nodeGraphType = MapNodeGroup.GraphType.Air;
+            var motor = bodyPrefab.GetComponent<CharacterMotor>();
+            if (motor)
+            {
+                newEnemySpawnCard.nodeGraphType = motor.isFlying ? MapNodeGroup.GraphType.Air : MapNodeGroup.GraphType.Ground;
+            }
             if (bodyName == "GrandParentBody") newEnemySpawnCard.nodeGraphType = MapNodeGroup.GraphType.Ground;
 
             if (newEnemySpawnCard.prefab == null) return null;
