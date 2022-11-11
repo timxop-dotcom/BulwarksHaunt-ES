@@ -28,6 +28,8 @@ Contains assets from [ambientCG.com](https://ambientCG.com/), licensed under CC0
 * Fixed Russian language file encoding issue which caused all text from this mod to show up as question marks
 * Fixed the wave break timer not showing up for non-host players
 * Fixed the wave counter not increasing for non-host players
+* Fixed the mod not being marked as "required for everyone" in multiplayer sessions
+* Fixed ground enemies spawning mid-air
 ## 1.0.4:
 * Fixed the stage replacing the destinations of all Lunar Seers after stage 8
 * Fixed obscene EXP and gold drops from non-ghost enemies
