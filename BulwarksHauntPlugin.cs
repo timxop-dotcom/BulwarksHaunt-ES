@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using R2API.Utils;
 using RoR2;
 using RoR2.ContentManagement;
 using System.Collections;
@@ -16,6 +17,7 @@ namespace BulwarksHaunt
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
     [BepInDependency(MysticsRisky2Utils.MysticsRisky2UtilsPlugin.PluginGUID, BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.TeamMoonstorm.MoonstormSharedUtils", BepInDependency.DependencyFlags.SoftDependency)]
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class BulwarksHauntPlugin : BaseUnityPlugin
     {
         public const string PluginGUID = "com.themysticsword.bulwarkshaunt";
