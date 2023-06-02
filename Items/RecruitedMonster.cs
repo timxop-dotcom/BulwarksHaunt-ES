@@ -6,20 +6,18 @@ using R2API;
 
 namespace BulwarksHaunt.Items
 {
-    public class GhostFury : BaseItem
+    public class RecruitedMonster : BaseItem
     {
         public override void OnLoad()
         {
             base.OnLoad();
-            itemDef.name = "BulwarksHaunt_GhostFury";
+            itemDef.name = "BulwarksHaunt_RecruitedMonster";
             SetItemTierWhenAvailable(ItemTier.NoTier);
             itemDef.tags = new ItemTag[] { };
             itemDef.canRemove = false;
             itemDef.hidden = true;
 
-            glassMaterial = BulwarksHauntPlugin.AssetBundle.LoadAsset<Material>("Assets/Mods/Bulwark's Haunt/GhostFury/matGhostFuryGlass.mat");
             overlayMaterial = BulwarksHauntPlugin.AssetBundle.LoadAsset<Material>("Assets/Mods/Bulwark's Haunt/GhostFury/matGhostFuryOverlay.mat");
-            CharacterModelMaterialOverrides.AddOverride("BulwarksHaunt_GhostFury", GlassMaterialOverride);
             On.RoR2.CharacterModel.UpdateOverlays += CharacterModel_UpdateOverlays;
 
             On.RoR2.CharacterBody.OnInventoryChanged += CharacterBody_OnInventoryChanged;
@@ -33,7 +31,7 @@ namespace BulwarksHaunt.Items
             CharacterBody characterBody = bodyObject?.GetComponent<CharacterBody>();
             if (characterBody && characterBody.inventory && characterBody.inventory.GetItemCount(itemDef) > 0)
             {
-                result = Language.GetStringFormatted("BODY_MODIFIER_BULWARKSHAUNT_GHOSTFURY", result);
+                result = Language.GetStringFormatted("BODY_MODIFIER_BULWARKSHAUNT_RECRUITED", result);
             }
             return result;
         }
@@ -45,9 +43,9 @@ namespace BulwarksHaunt.Items
                 var itemCount = sender.inventory.GetItemCount(itemDef);
                 if (itemCount > 0)
                 {
-                    args.baseHealthAdd += 160f * (1f + 0.3f * (sender.level - 1f));
                     args.armorAdd += 40f;
-                    args.attackSpeedMultAdd += 0.1f;
+                    args.damageMultAdd += 3f;
+                    args.attackSpeedMultAdd += 0.5f;
                     args.moveSpeedMultAdd += 0.25f;
                     args.cooldownReductionAdd += 0.2f;
                 }
@@ -58,11 +56,10 @@ namespace BulwarksHaunt.Items
         {
             orig(self);
             var itemCount = self.inventory.GetItemCount(itemDef);
-            if (self.inventory.GetItemCount(RoR2Content.Items.Ghost) > 0) itemCount = 0;
-            self.AddItemBehavior<BulwarksHauntGhostFuryController>(itemCount);
+            self.AddItemBehavior<BulwarksHauntRecruitedMonsterOverlayController>(itemCount);
         }
 
-        public class BulwarksHauntGhostFuryController : CharacterBody.ItemBehavior
+        public class BulwarksHauntRecruitedMonsterOverlayController : CharacterBody.ItemBehavior
         {
             public CharacterModel model;
 
@@ -71,10 +68,9 @@ namespace BulwarksHaunt.Items
                 model = body.modelLocator?.modelTransform?.GetComponent<CharacterModel>();
                 if (model)
                 {
-                    var matHelper = model.GetComponent<BulwarksHauntGhostFuryModelMaterialHelper>();
-                    if (!matHelper) matHelper = model.gameObject.AddComponent<BulwarksHauntGhostFuryModelMaterialHelper>();
+                    var matHelper = model.GetComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
+                    if (!matHelper) matHelper = model.gameObject.AddComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
                     matHelper.matActive = true;
-                    CharacterModelMaterialOverrides.SetOverrideActive(model, "BulwarksHaunt_GhostFury", true);
                 }
             }
 
@@ -82,15 +78,14 @@ namespace BulwarksHaunt.Items
             {
                 if (model && body && body.inventory && body.inventory.GetItemCount(BulwarksHauntContent.Items.BulwarksHaunt_GhostFury) <= 0)
                 {
-                    var matHelper = model.GetComponent<BulwarksHauntGhostFuryModelMaterialHelper>();
+                    var matHelper = model.GetComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
                     if (matHelper)
                         matHelper.matActive = false;
-                    CharacterModelMaterialOverrides.SetOverrideActive(model, "BulwarksHaunt_GhostFury", false);
                 }
             }
         }
 
-        public class BulwarksHauntGhostFuryModelMaterialHelper : MonoBehaviour
+        public class BulwarksHauntRecruitedMonsterModelMaterialHelper : MonoBehaviour
         {
             public CharacterModel model;
             public bool matActive = false;
@@ -101,22 +96,12 @@ namespace BulwarksHaunt.Items
             }
         }
 
-        public static Material glassMaterial;
         public static Material overlayMaterial;
-
-        public void GlassMaterialOverride(CharacterModel characterModel, ref Material material, ref bool ignoreOverlays)
-        {
-            if (characterModel.visibility >= VisibilityLevel.Visible && !ignoreOverlays)
-            {
-                material = glassMaterial;
-            }
-        }
-
         private void CharacterModel_UpdateOverlays(On.RoR2.CharacterModel.orig_UpdateOverlays orig, CharacterModel self)
         {
             orig(self);
             if (self.visibility < VisibilityLevel.Visible || self.activeOverlayCount >= CharacterModel.maxOverlays) return;
-            var matHelper = self.GetComponent<BulwarksHauntGhostFuryModelMaterialHelper>();
+            var matHelper = self.GetComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
             if (matHelper && matHelper.matActive)
             {
                 Material[] array = self.currentOverlays;

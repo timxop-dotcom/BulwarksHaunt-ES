@@ -82,6 +82,7 @@ namespace BulwarksHaunt
             SetUpStage();
             SetUpGameEnding();
             SetUpGamemode();
+            SetUpWaveModifiers();
             OnLoad();
 
             asset = sceneDef;
@@ -402,7 +403,7 @@ namespace BulwarksHaunt
                 combatDirector.maxRerollSpawnInterval = 4f;
                 combatDirector.moneyWaveIntervals = new RangeFloat[]
                 {
-                    new RangeFloat() { min = 10f, max = 20f }
+                    new RangeFloat() { min = 20f, max = 30f }
                 };
                 combatDirector.creditMultiplier = 0.75f;
                 combatDirector.skipSpawnIfTooCheap = false;
@@ -422,7 +423,7 @@ namespace BulwarksHaunt
                 combatDirector.maximumNumberToSpawnBeforeSkipping = 1;
                 combatDirector.moneyWaveIntervals = new RangeFloat[]
                 {
-                    new RangeFloat() { min = 30f, max = 60f }
+                    new RangeFloat() { min = 20f, max = 40f }
                 };
                 combatDirector.creditMultiplier = 1.6f;
                 combatDirector.teamIndex = TeamIndex.Monster;
@@ -486,7 +487,7 @@ namespace BulwarksHaunt
                 // Set up MapZones
                 var mapZonesObj = rootGameObjs.First(x => x.name == "MapZones");
 
-                mapZonesObj.transform.Find("OutOfBounds/TriggerEnter/Top").position += Vector3.down * 100f;
+                mapZonesObj.transform.Find("OutOfBounds/TriggerEnter/Top").position += Vector3.down * 50f;
 
                 var zones = mapZonesObj.transform.Find("OutOfBounds/TriggerEnter");
                 for (var i = 0; i < zones.childCount; i++)
@@ -582,6 +583,54 @@ namespace BulwarksHaunt
             BulwarksHauntContent.Resources.entityStateTypes.Add(typeof(GhostWaveControllerBaseState.BreakBetweenWaves));
             BulwarksHauntContent.Resources.entityStateTypes.Add(typeof(GhostWaveControllerBaseState.Ending));
             BulwarksHauntContent.Resources.entityStateTypes.Add(typeof(GhostWaveControllerBaseState.FadeOut));
+
+            bannedEnemiesNames = ConfigOptions.ConfigurableValue.CreateString(
+                BulwarksHauntPlugin.PluginGUID,
+                BulwarksHauntPlugin.PluginName,
+                BulwarksHauntPlugin.config,
+                "Settings",
+                "Banned Enemies",
+                "BrotherHurtBody,GeepBody,GipBody",
+                "Comma-separated list of enemies to prevent from being tracked towards A Moment, Haunted.",
+                onChanged: RebuildBannedEnemiesList
+            );
+            coopRespawnEachWave = ConfigOptions.ConfigurableValue.CreateBool(
+                BulwarksHauntPlugin.PluginGUID,
+                BulwarksHauntPlugin.PluginName,
+                BulwarksHauntPlugin.config,
+                "Settings",
+                "Respawn Players Each Wave",
+                true,
+                "If true, dead players will be respawned after each wave completion."
+            );
+
+            moreFrequentModifiers = ConfigOptions.ConfigurableValue.CreateBool(
+                BulwarksHauntPlugin.PluginGUID,
+                BulwarksHauntPlugin.PluginName,
+                BulwarksHauntPlugin.config,
+                "Challenge",
+                "Frequent Modifiers",
+                false,
+                "If true, Wave Modifiers will be activated every 2 waves instead of every 4."
+            );
+            superFrequentModifiers = ConfigOptions.ConfigurableValue.CreateBool(
+                BulwarksHauntPlugin.PluginGUID,
+                BulwarksHauntPlugin.PluginName,
+                BulwarksHauntPlugin.config,
+                "Challenge",
+                "Super Frequent Modifiers",
+                false,
+                "If true, Wave Modifiers will be activated every wave."
+            );
+            finalWaveAllModifiers = ConfigOptions.ConfigurableValue.CreateBool(
+                BulwarksHauntPlugin.PluginGUID,
+                BulwarksHauntPlugin.PluginName,
+                BulwarksHauntPlugin.config,
+                "Challenge",
+                "All Modifier Final Wave",
+                false,
+                "If true, the Final Wave will feature all Wave Modifiers at once. You'll probably lose."
+            );
         }
 
         public static void PlaySoundForViewedCameras(string soundName)
@@ -598,10 +647,30 @@ namespace BulwarksHaunt
             waveRng.Clear();
         }
 
+        public static ConfigOptions.ConfigurableValue<string> bannedEnemiesNames;
+        public static List<BodyIndex> bannedEnemiesBodyIndices = new List<BodyIndex>();
+        public static void RebuildBannedEnemiesList(string newBannedEnemiesList)
+        {
+            if (bannedEnemiesBodyIndices == null)
+                bannedEnemiesBodyIndices = new List<BodyIndex>();
+            bannedEnemiesBodyIndices.Clear();
+            foreach (var bodyName in newBannedEnemiesList.Split(','))
+            {
+                var bodyIndex = BodyCatalog.FindBodyIndex(bodyName);
+                if (bodyIndex != BodyIndex.None)
+                    bannedEnemiesBodyIndices.Add(bodyIndex);
+            }
+        }
+        public static ConfigOptions.ConfigurableValue<bool> coopRespawnEachWave;
+
+        public static ConfigOptions.ConfigurableValue<bool> moreFrequentModifiers;
+        public static ConfigOptions.ConfigurableValue<bool> superFrequentModifiers;
+        public static ConfigOptions.ConfigurableValue<bool> finalWaveAllModifiers;
+
         private void GlobalEventManager_OnCharacterDeath(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, GlobalEventManager self, DamageReport damageReport)
         {
             orig(self, damageReport);
-            if (damageReport.victimTeamIndex == TeamIndex.Monster && damageReport.attackerTeamIndex == TeamIndex.Player && damageReport.victimMaster)
+            if (damageReport.victimTeamIndex == TeamIndex.Monster && damageReport.attackerTeamIndex == TeamIndex.Player && damageReport.victimMaster && !bannedEnemiesBodyIndices.Contains(damageReport.victimBodyIndex))
             {
                 var currentStage = Run.instance.stageClearCount + 1;
                 if (currentStage <= maxWaves && SceneInfo.instance.countsAsStage)
@@ -686,18 +755,20 @@ namespace BulwarksHaunt
         public class BulwarksHauntGhostWaveController : MonoBehaviour
         {
             public static BulwarksHauntGhostWaveController instance;
-            
+            public static event System.Action onGhostWaveComplete;
+
             public int wave = 1;
             public int currentSpeechVariant = 1;
 
-            public float oobDamageTimer = 0f;
-            public float oobDamageInterval = 5f;
+            public float oobCheckTimer = 0f;
+            public float oobCheckInterval = 5f;
             public float oobRadius = 350f;
             public float oobRadiusShrinkAmount = 100f;
             public float oobShrinkDuration = 300f;
             public float oobShrinkTimer = 0f;
             public float oobHealthLoss = 0.34f;
             public Vector3 oobCenter = Vector3.zero;
+            public float oobBottomY = -400f;
 
             public void Start()
             {
@@ -708,10 +779,10 @@ namespace BulwarksHaunt
             {
                 if (NetworkServer.active)
                 {
-                    oobDamageTimer -= Time.fixedDeltaTime;
-                    while (oobDamageTimer <= 0)
+                    oobCheckTimer -= Time.fixedDeltaTime;
+                    while (oobCheckTimer <= 0)
                     {
-                        oobDamageTimer += oobDamageInterval;
+                        oobCheckTimer += oobCheckInterval;
 
                         var currentRadius = oobRadius - oobRadiusShrinkAmount * Mathf.Min(oobShrinkTimer / oobShrinkDuration, 1f);
                         for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
@@ -721,21 +792,51 @@ namespace BulwarksHaunt
                                 foreach (TeamComponent teamComponent in TeamComponent.GetTeamMembers(teamIndex))
                                 {
                                     CharacterBody body = teamComponent.body;
-                                    if (!body.healthComponent) continue;
                                     if (Vector3.Distance(teamComponent.transform.position, oobCenter) >= currentRadius)
                                     {
-                                        body.healthComponent.TakeDamage(new DamageInfo
-                                        {
-                                            damage = oobHealthLoss * body.healthComponent.fullCombinedHealth,
-                                            position = body.corePosition,
-                                            damageType = DamageType.BypassArmor | DamageType.BypassBlock,
-                                            damageColorIndex = DamageColorIndex.Void
-                                        });
+                                        HandleBodyOutOfBounds(body);
+                                    }
+                                }
+                            }
+                            else if (teamIndex == TeamIndex.Player)
+                            {
+                                foreach (TeamComponent teamComponent in TeamComponent.GetTeamMembers(teamIndex))
+                                {
+                                    CharacterBody body = teamComponent.body;
+                                    if (teamComponent.transform.position.y <= oobBottomY)
+                                    {
+                                        HandleBodyOutOfBounds(body);
                                     }
                                 }
                             }
                         }
                     }
+                }
+            }
+
+            public void HandleBodyOutOfBounds(CharacterBody body)
+            {
+                if ((body.teamComponent && body.teamComponent.teamIndex == TeamIndex.Player) || (body.inventory && body.inventory.GetItemCount(RoR2Content.Items.TeleportWhenOob) > 0))
+                {
+                    Vector3 teleportDestination = Run.instance.FindSafeTeleportPosition(body, null, 0f, 0f);
+                    TeleportHelper.TeleportBody(body, teleportDestination);
+                    GameObject teleportEffectPrefab = Run.instance.GetTeleportEffectPrefab(body.gameObject);
+                    if (teleportEffectPrefab)
+                    {
+                        EffectManager.SimpleEffect(teleportEffectPrefab, teleportDestination, Quaternion.identity, true);
+                    }
+                    return;
+                }
+
+                if (body.healthComponent)
+                {
+                    body.healthComponent.TakeDamage(new DamageInfo
+                    {
+                        damage = oobHealthLoss * body.healthComponent.fullCombinedHealth,
+                        position = body.corePosition,
+                        damageType = DamageType.BypassArmor | DamageType.BypassBlock,
+                        damageColorIndex = DamageColorIndex.Void
+                    });
                 }
             }
 
@@ -746,6 +847,7 @@ namespace BulwarksHaunt
 
             public void OnCompleted()
             {
+                if (onGhostWaveComplete != null) onGhostWaveComplete();
                 RoR2.UI.ObjectivePanelController.collectObjectiveSources -= ObjectivePanelController_collectObjectiveSources;
             }
 
@@ -859,18 +961,20 @@ namespace BulwarksHaunt
                 public int killedEnemies = 0;
                 public int totalEnemies = 0;
 
-                public float spawnTimer = 5f;
+                public float spawnTimer = 0.1f;
                 public float spawnInterval = 20f;
                 public int spawnBatchCount = 10;
                 public int speechVariant = 1;
 
                 public float spawnBatchTimer = 0f;
-                public float spawnBatchInterval = 0.33f;
+                public float spawnBatchInterval = 0.1f;
                 public int spawnBatchCurrent = 0;
 
                 public float aliveEnemiesRecheckTimer = 60f;
                 public float aliveEnemiesRecheckInterval = 60f;
                 public float antiSoftlockTimer = 600f;
+
+                public List<BulwarksHauntWaveModifier> activeModifiers = new List<BulwarksHauntWaveModifier>();
 
                 public override void OnEnter()
                 {
@@ -1007,15 +1111,44 @@ namespace BulwarksHaunt
                         if (NetworkServer.active)
                             new SyncTotalEnemies(gameObject.GetComponent<NetworkIdentity>().netId, totalEnemies).Send(NetworkDestination.Clients);
                     }
-                    spawnBatchCount += 2 * (ghostWaveController.wave - 1);
+                    spawnBatchCount += 1 * (ghostWaveController.wave - 1);
                     GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
 
                     RoR2.UI.ObjectivePanelController.collectObjectiveSources += ObjectivePanelController_collectObjectiveSources;
+
+                    if (NetworkServer.active && ShouldActivateModifier())
+                    {
+                        var allModifiers = new List<BulwarksHauntWaveModifier>(WaveModifierCatalog.allWaveModifiers);
+                        for (var i = 0; i < ModifiersToActivateThisWave(); i++)
+                        {
+                            if (allModifiers.Count <= 0) break;
+
+                            var randomModifier = rng.NextElementUniform(allModifiers);
+                            allModifiers.Remove(randomModifier);
+                            randomModifier.Activate(this);
+                            activeModifiers.Add(randomModifier);
+                        }
+                    }
                 }
 
                 public uint GetCoinReward()
                 {
                     return (uint)(1 + Mathf.CeilToInt((float)ghostWaveController.wave / 4f));
+                }
+                
+                public bool ShouldActivateModifier()
+                {
+                    var everyXWaves = 4;
+                    if (moreFrequentModifiers) everyXWaves = 2;
+                    if (superFrequentModifiers) everyXWaves = 1;
+                    return (ghostWaveController.wave % everyXWaves) == 0;
+                }
+
+                public int ModifiersToActivateThisWave()
+                {
+                    if (ghostWaveController.wave == maxWaves && finalWaveAllModifiers)
+                        return WaveModifierCatalog.allWaveModifiers.Count;
+                    return 1;
                 }
 
                 private void GlobalEventManager_onCharacterDeathGlobal(DamageReport damageReport)
@@ -1027,8 +1160,8 @@ namespace BulwarksHaunt
                         if (NetworkServer.active)
                             new SyncKilledEnemies(gameObject.GetComponent<NetworkIdentity>().netId, killedEnemies).Send(NetworkDestination.Clients);
                         aliveEnemiesRecheckTimer = 0.1f;
-                        if (aliveEnemies.Count <= 0)
-                            spawnTimer = 1f;
+                        spawnTimer -= (spawnInterval / (float)spawnBatchCount) * 0.8f;
+                        if (aliveEnemies.Count <= 3 && spawnTimer > 0.1f && spawnBatchCurrent <= 0) spawnTimer = 0.1f;
                     }
 
                     if (damageReport.victimMaster?.playerCharacterMasterController != null)
@@ -1082,6 +1215,20 @@ namespace BulwarksHaunt
 
                         ghostWaveController.oobShrinkTimer += Time.fixedDeltaTime;
                     }
+
+                    foreach (var activeModifier in activeModifiers)
+                    {
+                        if (activeModifier.onFixedUpdate != null) activeModifier.onFixedUpdate(this);
+                    }
+                }
+
+                public override void Update()
+                {
+                    base.Update();
+                    foreach (var activeModifier in activeModifiers)
+                    {
+                        if (activeModifier.onUpdate != null) activeModifier.onUpdate(this);
+                    }
                 }
 
                 public void TryUnloadFromBatch()
@@ -1096,10 +1243,25 @@ namespace BulwarksHaunt
                     var newEnemySpawnCard = GenerateSpawnCardForKilledEnemy(newEnemy);
 
                     if (newEnemySpawnCard) {
-                        DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(newEnemySpawnCard, new DirectorPlacementRule
+                        var directorPlacementRule = new DirectorPlacementRule
                         {
                             placementMode = DirectorPlacementRule.PlacementMode.Random
-                        }, RoR2Application.rng);
+                        };
+
+                        var allLivingPlayers = PlayerCharacterMasterController.instances.Where(x => x.master.hasBody).ToList();
+                        if (allLivingPlayers.Count > 0)
+                        {
+                            var randomPlayer = rng.NextElementUniform(allLivingPlayers);
+                            directorPlacementRule = new DirectorPlacementRule
+                            {
+                                placementMode = DirectorPlacementRule.PlacementMode.Approximate,
+                                spawnOnTarget = randomPlayer.master.GetBodyObject().transform,
+                                preventOverhead = true
+                            };
+                            DirectorCore.GetMonsterSpawnDistance(DirectorCore.MonsterSpawnDistance.Standard, out directorPlacementRule.minDistance, out directorPlacementRule.maxDistance);
+                        }
+
+                        DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(newEnemySpawnCard, directorPlacementRule, rng);
                         directorSpawnRequest.teamIndexOverride = TeamIndex.Monster;
                         directorSpawnRequest.ignoreTeamMemberLimit = true;
                         directorSpawnRequest.onSpawnedServer += (spawnResult) =>
@@ -1208,6 +1370,7 @@ namespace BulwarksHaunt
 
                 public void RespawnPlayers()
                 {
+                    if (!coopRespawnEachWave) return;
                     foreach (PlayerCharacterMasterController pcmc in PlayerCharacterMasterController.instances)
                     {
                         CharacterMaster master = pcmc.master;
@@ -1240,6 +1403,11 @@ namespace BulwarksHaunt
                     PlaySoundForViewedCameras("Play_ui_obj_nullWard_complete");
                     GlobalEventManager.onCharacterDeathGlobal -= GlobalEventManager_onCharacterDeathGlobal;
                     RoR2.UI.ObjectivePanelController.collectObjectiveSources -= ObjectivePanelController_collectObjectiveSources;
+
+                    foreach (var activeModifier in activeModifiers)
+                    {
+                        activeModifier.Deactivate(this);
+                    }
                 }
 
                 private void ObjectivePanelController_collectObjectiveSources(CharacterMaster master, List<RoR2.UI.ObjectivePanelController.ObjectiveSourceDescriptor> objectiveSourcesList)
@@ -1544,6 +1712,499 @@ namespace BulwarksHaunt
                             }
                         }
                     }
+                }
+            }
+        }
+
+        public static class WaveModifierCatalog
+        {
+            public static List<BulwarksHauntWaveModifier> allWaveModifiers = new List<BulwarksHauntWaveModifier>();
+            public static Dictionary<string, BulwarksHauntWaveModifier> nameToModifier = new Dictionary<string, BulwarksHauntWaveModifier>();
+            public static Dictionary<int, BulwarksHauntWaveModifier> indexToModifier = new Dictionary<int, BulwarksHauntWaveModifier>();
+            public static List<string> activeWaveModifiers = new List<string>();
+
+            public static System.Action<List<BulwarksHauntWaveModifier>> CollectWaveModifiers;
+            public static void SetWaveModifiers(List<BulwarksHauntWaveModifier> newWaveModifiers)
+            {
+                allWaveModifiers.Clear();
+                nameToModifier.Clear();
+                indexToModifier.Clear();
+
+                for (var i = 0; i < newWaveModifiers.Count; i++)
+                {
+                    var waveModifier = newWaveModifiers[i];
+
+                    waveModifier.index = i;
+
+                    allWaveModifiers.Add(waveModifier);
+                    nameToModifier.Add(waveModifier.name, waveModifier);
+                    indexToModifier.Add(waveModifier.index, waveModifier);
+                }
+            }
+
+            public static BulwarksHauntWaveModifier GetWaveModifier(int index)
+            {
+                if (indexToModifier.ContainsKey(index)) return indexToModifier[index];
+                return null;
+            }
+
+            public static bool IsActive(string name)
+            {
+                return activeWaveModifiers.Contains(name);
+            }
+        }
+
+        public class WaveModifierObjectiveController : RoR2.UI.ObjectivePanelController.ObjectiveTracker
+        {
+            public override string GenerateString()
+            {
+                mustBeDirty = false;
+                var waveModifier = (BulwarksHauntWaveModifier)sourceDescriptor.source;
+                return string.Format(
+                    Language.GetString("OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_MODIFIERACTIVE"),
+                    Language.GetString(waveModifier.nameToken),
+                    Language.GetString(waveModifier.descriptionToken)
+                );
+            }
+
+            public override bool IsDirty()
+            {
+                return mustBeDirty;
+            }
+
+            public bool mustBeDirty = true;
+        }
+
+        public void SetUpWaveModifiers()
+        {
+            waveModifierNotificationIcon = BulwarksHauntPlugin.AssetBundle.LoadAsset<Sprite>("Assets/Mods/Bulwark's Haunt/texGhostWaveModifierIcon.png").texture;
+            On.RoR2.UI.NotificationUIController.SetUpNotification += NotificationUIController_SetUpNotification;
+
+            R2API.RecalculateStatsAPI.GetStatCoefficients += WaveModifiersStatMods;
+            GenericGameEvents.OnApplyDamageReductionModifiers += WaveModifiersDamageIncreaseMods;
+            GenericGameEvents.BeforeTakeDamage += WaveModifiersBeforeTakeDamage;
+            GenericGameEvents.OnTakeDamage += WaveModifiersOnTakeDamage;
+
+            void ForceRecalculateStats(GhostWaveControllerBaseState.MonsterWaves waveState)
+            {
+                foreach (var cb in CharacterBody.readOnlyInstancesList)
+                {
+                    cb.statsDirty = true;
+                }
+            }
+
+            var waveModifiersToRegister = new List<BulwarksHauntWaveModifier>();
+
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "Cold";
+                waveModifier.AutoPopulateTokens();
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "SlowAttackSpeed";
+                waveModifier.AutoPopulateTokens();
+                waveModifier.onActivated += ForceRecalculateStats;
+                waveModifier.onDeactivated += ForceRecalculateStats;
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "Stone";
+                waveModifier.AutoPopulateTokens();
+                waveModifier.onActivated += ForceRecalculateStats;
+                waveModifier.onDeactivated += ForceRecalculateStats;
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "NoSpecial";
+                waveModifier.AutoPopulateTokens();
+                waveModifier.onActivated += ForceRecalculateStats;
+                waveModifier.onDeactivated += ForceRecalculateStats;
+                On.RoR2.GenericSkill.CalculateFinalRechargeInterval += WaveModifiersSkillCooldown;
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "Meteors";
+                waveModifier.AutoPopulateTokens();
+                var meteorStormController = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/MeteorStorm").GetComponent<MeteorStormController>();
+                var meteorTimer = 0f;
+                var meteorInterval = 1f;
+                var meteorCount = 3;
+                var meteorRadius = 6f;
+                var meteorBaseDamage = 20f;
+                waveModifier.onActivated += (waveState) =>
+                {
+                    meteorTimer = 0f;
+                };
+                waveModifier.onFixedUpdate += (waveState) =>
+                {
+                    if (NetworkServer.active)
+                    {
+                        meteorTimer -= Time.fixedDeltaTime;
+                        if (meteorTimer <= 0f)
+                        {
+                            meteorTimer += meteorInterval;
+
+                            var whileAttempts = 3;
+                            for (var i = 0; i < meteorCount; i++)
+                            {
+                                var circle = 250f * Random.insideUnitCircle;
+                                var meteorPosition = new Vector3(circle.x, 300f, circle.y);
+                                if (Physics.Raycast(new Ray(meteorPosition, Vector3.down), out var hitInfo, 1000f, LayerIndex.world.mask, QueryTriggerInteraction.UseGlobal))
+                                    meteorPosition.y = hitInfo.point.y;
+                                else
+                                {
+                                    if (whileAttempts > 0)
+                                    {
+                                        i--;
+                                        whileAttempts--;
+                                    }
+                                    continue;
+                                }
+                                meteorPosition += Vector3.up * 0.2f;
+
+                                RoR2Application.fixedTimeTimers.CreateTimer(Random.Range(0f, meteorInterval), () =>
+                                {
+                                    if (!waveModifier.active) return;
+                                    EffectManager.SpawnEffect(meteorStormController.warningEffectPrefab, new EffectData
+                                    {
+                                        origin = meteorPosition,
+                                        scale = meteorRadius
+                                    }, true);
+                                    RoR2Application.fixedTimeTimers.CreateTimer(2f, () =>
+                                    {
+                                        if (!waveModifier.active) return;
+                                        EffectManager.SpawnEffect(meteorStormController.impactEffectPrefab, new EffectData
+                                        {
+                                            origin = meteorPosition
+                                        }, true);
+                                        new BlastAttack
+                                        {
+                                            baseDamage = meteorBaseDamage * (0.8f + 0.2f * Run.instance.ambientLevelFloor),
+                                            crit = false,
+                                            falloffModel = BlastAttack.FalloffModel.None,
+                                            bonusForce = Vector3.zero,
+                                            damageColorIndex = DamageColorIndex.Default,
+                                            position = meteorPosition,
+                                            procChainMask = default(ProcChainMask),
+                                            procCoefficient = 1f,
+                                            teamIndex = TeamIndex.Monster,
+                                            radius = meteorRadius
+                                        }.Fire();
+                                    });
+                                });
+                            }
+                        }
+                    }
+                };
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "Unlucky";
+                waveModifier.AutoPopulateTokens();
+                waveModifier.onActivated += (waveState) =>
+                {
+                    foreach (var cm in CharacterMaster.readOnlyInstancesList)
+                    {
+                        if (cm.inventory)
+                            cm.OnInventoryChanged();
+                    }
+                };
+                waveModifier.onDeactivated += (waveState) =>
+                {
+                    foreach (var cm in CharacterMaster.readOnlyInstancesList)
+                    {
+                        if (cm.inventory)
+                            cm.OnInventoryChanged();
+                    }
+                };
+                On.RoR2.CharacterMaster.OnInventoryChanged += WaveModifiersCharacterMasterInventoryChanged;
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "VoidInvasion";
+                waveModifier.AutoPopulateTokens();
+                var voidInvasionTimer = 0f;
+                var voidInvasionInterval = 30f;
+                var voidInvasionCount = 2;
+                var voidInvasionSpawnCards = new List<CharacterSpawnCard>();
+                voidInvasionSpawnCards.Add(Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Nullifier/cscNullifier.asset").WaitForCompletion());
+                waveModifier.onActivated += (waveState) =>
+                {
+                    voidInvasionTimer = 0f;
+                };
+                waveModifier.onFixedUpdate += (waveState) =>
+                {
+                    if (NetworkServer.active)
+                    {
+                        voidInvasionTimer -= Time.fixedDeltaTime;
+                        if (voidInvasionTimer <= 0f)
+                        {
+                            voidInvasionTimer += voidInvasionInterval;
+
+                            if (voidInvasionSpawnCards.Count > 0)
+                            {
+                                for (var i = 0; i < voidInvasionCount; i++)
+                                {
+                                    var voidEnemySpawnCard = RoR2Application.rng.NextElementUniform(voidInvasionSpawnCards);
+                                    DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(voidEnemySpawnCard, new DirectorPlacementRule
+                                    {
+                                        placementMode = DirectorPlacementRule.PlacementMode.Random
+                                    }, RoR2Application.rng);
+                                    directorSpawnRequest.teamIndexOverride = TeamIndex.Void;
+                                    directorSpawnRequest.ignoreTeamMemberLimit = false;
+                                    DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
+                                }
+                            }
+                        }
+                    }
+                };
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "HighGravity";
+                waveModifier.AutoPopulateTokens();
+                waveModifier.onActivated += ForceRecalculateStats;
+                waveModifier.onDeactivated += ForceRecalculateStats;
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "BadHealing";
+                waveModifier.AutoPopulateTokens();
+                IL.RoR2.HealthComponent.Heal += WaveModifierBadHealing;
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "FasterSpawns";
+                waveModifier.AutoPopulateTokens();
+                waveModifier.onActivated += (waveState) =>
+                {
+                    if (waveState != null)
+                    {
+                        waveState.spawnBatchCount += 8;
+                        waveState.spawnBatchInterval *= 0.5f;
+                    }
+                };
+                waveModifier.onFixedUpdate += (waveState) =>
+                {
+                    if (waveState != null)
+                    {
+                        waveState.spawnTimer -= 1f * Time.fixedDeltaTime;
+                    }
+                };
+                waveModifier.onDeactivated += (waveState) =>
+                {
+                    if (waveState != null)
+                    {
+                        waveState.spawnBatchCount -= 8;
+                        waveState.spawnBatchInterval /= 0.5f;
+                    }
+                };
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "EveryoneFaster";
+                waveModifier.AutoPopulateTokens();
+                waveModifiersToRegister.Add(waveModifier);
+            }
+            {
+                var waveModifier = ScriptableObject.CreateInstance<BulwarksHauntWaveModifier>();
+                waveModifier.cachedName = "EnemyDodge";
+                waveModifier.AutoPopulateTokens();
+                waveModifiersToRegister.Add(waveModifier);
+            }
+
+            if (WaveModifierCatalog.CollectWaveModifiers != null)
+                WaveModifierCatalog.CollectWaveModifiers(waveModifiersToRegister);
+
+            WaveModifierCatalog.SetWaveModifiers(waveModifiersToRegister);
+
+            RoR2Application.onLoad += () =>
+            {
+                foreach (var modifier in WaveModifierCatalog.allWaveModifiers)
+                {
+                    foreach (var lang in Language.GetAllLanguages())
+                    {
+                        R2API.LanguageAPI.Add(
+                            "BULWARKSHAUNT_GHOSTWAVE_MODIFIER_" + modifier.cachedName.ToUpperInvariant() + "_POPUP",
+                            lang.GetLocalizedFormattedStringByToken(
+                                "BULWARKSHAUNT_GHOSTWAVE_MODIFIER_POPUP_TITLE",
+                                lang.GetLocalizedStringByToken(modifier.nameToken)
+                            ),
+                            lang.name
+                        );
+                    }
+                }
+            };
+
+            RoR2.UI.ObjectivePanelController.collectObjectiveSources += (master, objectiveSourcesList) =>
+            {
+                foreach (var activeModifierName in WaveModifierCatalog.activeWaveModifiers)
+                {
+                    if (!WaveModifierCatalog.nameToModifier.ContainsKey(activeModifierName)) continue;
+                    var activeModifier = WaveModifierCatalog.nameToModifier[activeModifierName];
+                    objectiveSourcesList.Add(new RoR2.UI.ObjectivePanelController.ObjectiveSourceDescriptor
+                    {
+                        master = master,
+                        objectiveType = typeof(WaveModifierObjectiveController),
+                        source = activeModifier
+                    });
+                }
+            };
+        }
+
+        private void WaveModifiersStatMods(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (!sender.teamComponent) return;
+
+            if (sender.teamComponent.teamIndex == TeamIndex.Player)
+            {
+                if (WaveModifierCatalog.IsActive("SlowAttackSpeed"))
+                {
+                    args.attackSpeedMultAdd -= 0.3f;
+                }
+                if (WaveModifierCatalog.IsActive("Stone"))
+                {
+                    args.healthMultAdd += 1f;
+                }
+                if (WaveModifierCatalog.IsActive("HighGravity"))
+                {
+                    args.jumpPowerMultAdd -= 0.5f;
+                }
+            }
+            if (WaveModifierCatalog.IsActive("EveryoneFaster"))
+            {
+                args.moveSpeedMultAdd += 0.5f;
+                args.attackSpeedMultAdd += 1f;
+            }
+        }
+
+        private void WaveModifiersDamageIncreaseMods(DamageInfo damageInfo, MysticsRisky2UtilsPlugin.GenericCharacterInfo attackerInfo, MysticsRisky2UtilsPlugin.GenericCharacterInfo victimInfo, ref float damage)
+        {
+            if (attackerInfo.teamIndex == TeamIndex.Player)
+            {
+                if (WaveModifierCatalog.IsActive("Stone"))
+                {
+                    damageInfo.damage *= 0.5f;
+                }
+            }
+        }
+
+        private void WaveModifiersBeforeTakeDamage(DamageInfo damageInfo, MysticsRisky2UtilsPlugin.GenericCharacterInfo attackerInfo, MysticsRisky2UtilsPlugin.GenericCharacterInfo victimInfo)
+        {
+            if (damageInfo.rejected) return;
+
+            if (victimInfo.teamIndex == TeamIndex.Monster)
+            {
+                if (WaveModifierCatalog.IsActive("EnemyDodge"))
+                {
+                    if (Util.CheckRoll(10f))
+                    {
+                        EffectData effectData = new EffectData
+                        {
+                            origin = damageInfo.position,
+                            rotation = Util.QuaternionSafeLookRotation((damageInfo.force != Vector3.zero) ? damageInfo.force : UnityEngine.Random.onUnitSphere)
+                        };
+                        EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearEffectPrefab, effectData, true);
+                        damageInfo.rejected = true;
+                    }
+                }
+            }
+        }
+
+        private void WaveModifiersOnTakeDamage(DamageReport damageReport)
+        {
+            if (damageReport.damageInfo == null || damageReport.damageInfo.rejected) return;
+
+            if (damageReport.attackerTeamIndex == TeamIndex.Monster)
+            {
+                if (WaveModifierCatalog.IsActive("Cold"))
+                {
+                    damageReport.victimBody.AddTimedBuff(RoR2Content.Buffs.Slow80, 1f * damageReport.damageInfo.procCoefficient);
+                }
+            }
+        }
+
+        private void WaveModifiersCharacterMasterInventoryChanged(On.RoR2.CharacterMaster.orig_OnInventoryChanged orig, CharacterMaster self)
+        {
+            orig(self);
+            if (self.teamIndex == TeamIndex.Player)
+            {
+                if (WaveModifierCatalog.IsActive("Unlucky"))
+                {
+                    self.luck -= 2;
+                }
+            }
+        }
+
+        private float WaveModifiersSkillCooldown(On.RoR2.GenericSkill.orig_CalculateFinalRechargeInterval orig, GenericSkill self)
+        {
+            var result = orig(self);
+            if (WaveModifierCatalog.IsActive("NoSpecial"))
+            {
+                result = Mathf.Max(result * 5f, 5f);
+            }
+            return result;
+        }
+
+        private void WaveModifierBadHealing(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+
+            var healAmountPos = 1;
+
+            if (c.TryGotoNext(
+                x => x.MatchMul()
+            ) && c.TryGotoNext(
+                MoveType.After,
+                x => x.MatchStarg(healAmountPos)
+            ))
+            {
+                c.GotoNext(MoveType.AfterLabel);
+                c.Emit(OpCodes.Ldarg, 0);
+                c.Emit(OpCodes.Ldarg, healAmountPos);
+                c.EmitDelegate<System.Func<HealthComponent, float, float>>((hc, healAmount) =>
+                {
+                    if (hc.body && hc.body.teamComponent && hc.body.teamComponent.teamIndex == TeamIndex.Player)
+                    {
+                        if (WaveModifierCatalog.IsActive("BadHealing"))
+                        {
+                            healAmount *= 0.25f;
+                        }
+                    }
+                    return healAmount;
+                });
+                c.Emit(OpCodes.Starg, healAmountPos);
+            }
+            else
+            {
+                BulwarksHauntPlugin.logger.LogError("Failed to hook healing modifier");
+            }
+        }
+
+        public static Texture waveModifierNotificationIcon;
+        private void NotificationUIController_SetUpNotification(On.RoR2.UI.NotificationUIController.orig_SetUpNotification orig, RoR2.UI.NotificationUIController self, CharacterMasterNotificationQueue.NotificationInfo notificationInfo)
+        {
+            orig(self, notificationInfo);
+            if (notificationInfo.data != null)
+            {
+                var waveModifier = notificationInfo.data as BulwarksHauntWaveModifier;
+                if (waveModifier != null)
+                {
+                    self.currentNotification.titleText.token = waveModifier.popupToken;
+                    self.currentNotification.descriptionText.token = waveModifier.descriptionToken;
+                    self.currentNotification.iconImage.texture = waveModifierNotificationIcon;
+                    self.currentNotification.titleTMP.color = ColorCatalog.GetColor(ColorCatalog.ColorIndex.Equipment);
                 }
             }
         }

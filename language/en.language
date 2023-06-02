@@ -10,19 +10,107 @@
 		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_CLEARWAVES_FINAL": "Clear the <color=#ff6a07>Final Wave!</color>",
 		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_KILLENEMIES": "Defeat the <color=#ff6a07><link=\"BulwarksHauntWavy\">Resurgent Spirits</link></color> ({0}%)",
 		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_WAITFORNEXTWAVE": "Next Wave in <color=#ff6a07>{0}</color>",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_MODIFIERACTIVE": "<style=cWorldEvent>Wave Modifier - {0}\r\n{1}</color>",
 
 		"ITEM_BULWARKSHAUNT_SWORD_NAME": "Crystalline Blade",
 		"ITEM_BULWARKSHAUNT_SWORD_PICKUP": "Voices echo through your mind, whispering: <link=\"BulwarksHauntWavy\">\"the Obelisk... the Obelisk...\"</link>",
 		"ITEM_BULWARKSHAUNT_SWORD_DESC": "Voices echo through your mind, whispering: <link=\"BulwarksHauntWavy\">\"the Obelisk... the Obelisk...\"</link>",
 		"ITEM_BULWARKSHAUNT_SWORD_LORE": "<style=cMono>PLAYING TRANSLATED AUDIO...</style>\r\n\r\n\"But it's so boring here... Can I go play instead?\"\r\n\r\n\"Shush, you! This is a rare occasion. Once in every 50 lunar cycles, when the Moon gets closest to the meadow, He descends from the realm beyond and blesses us with protection. HE, who created this world for us in the first place! Be grateful!\"\r\n\r\n\"Wait, He? You mean...\"\r\n\r\n\"Yes.\"\r\n\r\n\"Wow...\"\r\n\r\n\"And if we don't respect this tradition, and, in turn, don't respect Him, calamities are bound to taint our land, Demons will come down from above, and... they will... we will...\"\r\n\r\n\"...\"\r\n\r\n\"Well... It would be bad. Er, I mean... Listen. Don't think about it too much.\"\r\n\r\n\"...\"\r\n\r\n\"I'm sorry. I'm very, very sorry. Please, don't cry.\"\r\n\r\n<style=cMono>END OF TRANSLATED AUDIO</style>",
 
+		"ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_PICKUP": "Activating equipment temporarily recruits nearby enemies. <link=\"BulwarksHauntWavy\">Sends to the realm beyond if used at the Obelisk.</link>",
+		"ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_DESC": "Activating equipment <style=cIsUtility>recruits</style> non-boss enemies in a <style=cIsUtility>{Radius}m radius</style> to your team for <style=cIsUtility>{Duration} <style=cStack>(+{DurationPerStack} per stack)</style> seconds</style>. <style=cIsUtility><link=\"BulwarksHauntWavy\">Sends to the realm beyond if used at the Obelisk.</link></style>",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_WINGHOSTWAVE_NAME": "Grave Mistake",
+		"ACHIEVEMENT_BULWARKSHAUNT_WINGHOSTWAVE_DESCRIPTION": "Send a survivor into eternal suffering to unleash the power of the Crystalline Blade.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_COMMANDOWINGHOSTWAVE_NAME": "Commando: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_COMMANDOWINGHOSTWAVE_DESCRIPTION": "As Commando, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_HUNTRESSWINGHOSTWAVE_NAME": "Huntress: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_HUNTRESSWINGHOSTWAVE_DESCRIPTION": "As Huntress, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_BANDIT2WINGHOSTWAVE_NAME": "Bandit: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_BANDIT2WINGHOSTWAVE_DESCRIPTION": "As Bandit, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_TOOLBOTWINGHOSTWAVE_NAME": "MUL-T: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_TOOLBOTWINGHOSTWAVE_DESCRIPTION": "As MUL-T, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_ENGIWINGHOSTWAVE_NAME": "Engineer: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_ENGIWINGHOSTWAVE_DESCRIPTION": "As Engineer, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_MAGEWINGHOSTWAVE_NAME": "Artificer: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_MAGEWINGHOSTWAVE_DESCRIPTION": "As Artificer, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_MERCWINGHOSTWAVE_NAME": "Mercenary: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_MERCWINGHOSTWAVE_DESCRIPTION": "As Mercenary, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_TREEBOTWINGHOSTWAVE_NAME": "REX: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_TREEBOTWINGHOSTWAVE_DESCRIPTION": "As REX, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_LOADERWINGHOSTWAVE_NAME": "Loader: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_LOADERWINGHOSTWAVE_DESCRIPTION": "As Loader, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_CROCOWINGHOSTWAVE_NAME": "Acrid: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_CROCOWINGHOSTWAVE_DESCRIPTION": "As Acrid, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_CAPTAINWINGHOSTWAVE_NAME": "Captain: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_CAPTAINWINGHOSTWAVE_DESCRIPTION": "As Captain, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_RAILGUNNERWINGHOSTWAVE_NAME": "Railgunner: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_RAILGUNNERWINGHOSTWAVE_DESCRIPTION": "As Railgunner, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_VOIDSURVIVORWINGHOSTWAVE_NAME": "Worst Character: Spiritual Success",
+		"ACHIEVEMENT_BULWARKSHAUNT_VOIDSURVIVORWINGHOSTWAVE_DESCRIPTION": "As 「V??oid Fiend』, survive the onslaught of spirits in A Moment, Haunted.",
+
+		"GENERIC_SKIN_BULWARKSHAUNT_ALT_NAME": "Ghoul",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_POPUP_TITLE": "Wave Modifier - {0}",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_COLD_NAME": "Frost",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_COLD_DESCRIPTION": "Enemy hits slow you.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_SLOWATTACKSPEED_NAME": "Rigor",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_SLOWATTACKSPEED_DESCRIPTION": "Reduced attack speed.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_STONE_NAME": "Fortress",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_STONE_DESCRIPTION": "Doubled health, halved damage.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_NOSPECIAL_NAME": "Interference",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_NOSPECIAL_DESCRIPTION": "Special ability cooldown greatly increased.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_METEORS_NAME": "Calamity",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_METEORS_DESCRIPTION": "A meteor storm strikes the battlefield.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_UNLUCKY_NAME": "Despair",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_UNLUCKY_DESCRIPTION": "Reduced luck.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_VOIDINVASION_NAME": "Opposition",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_VOIDINVASION_DESCRIPTION": "Void Reavers invade the realm.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_HIGHGRAVITY_NAME": "Weight",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_HIGHGRAVITY_DESCRIPTION": "Jump height reduced.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_BADHEALING_NAME": "Malaise",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_BADHEALING_DESCRIPTION": "Healing is significantly weaker.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_FASTERSPAWNS_NAME": "Haste",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_FASTERSPAWNS_DESCRIPTION": "Resurgent Spirits appear much more frequently.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_EVERYONEFASTER_NAME": "Tachysensia",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_EVERYONEFASTER_DESCRIPTION": "You and the enemies move and attack faster.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_ENEMYDODGE_NAME": "Insecurity",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_ENEMYDODGE_DESCRIPTION": "Attacks have a chance to miss.",
+
 		"BODY_MODIFIER_BULWARKSHAUNT_GHOSTFURY": "Ghost of {0}",
+		"BODY_MODIFIER_BULWARKSHAUNT_RECRUITED": "Follower {0}",
 
 		"BULWARKSHAUNT_SWORDOBJ_NAME": "Bulwark's Grave",
 		"BULWARKSHAUNT_SWORDOBJ_CONTEXT": "Defile",
 
-		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVECLEAR": "<style=cStack>(Wave complete! +{0} Lunar Coins.)</style>",
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVECLEAR": "<style=cWorldEvent>Wave complete! +{0} Lunar Coins.</style>",
 		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVEFALLBACK": "<style=cStack>(You killed no enemies on stage {0}. Adding random enemy ghosts instead...)</style>",
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVEMODIFIER": "<style=cWorldEvent>Wave modifier activated: {0}...</style>",
 
 		"BULWARKSHAUNT_GHOSTWAVE_VOICE_FORMAT": "<color=#ffcdc6><size=120%>???: {0}</color></size>",
 

@@ -1,11 +1,11 @@
 {
   "name": "BulwarksHaunt",
-  "version_number": "1.0.5",
+  "version_number": "1.1.2",
   "website_url": "https://github.com/TheMysticSword/BulwarksHaunt",
   "description": "Adds an alternate Obelisk ending.",
   "dependencies": [
     "bbepis-BepInExPack-5.4.1905",
     "RiskofThunder-HookGenPatcher-1.2.3",
-    "TheMysticSword-MysticsRisky2Utils-2.0.7"
+    "TheMysticSword-MysticsRisky2Utils-2.0.8"
   ]
 }

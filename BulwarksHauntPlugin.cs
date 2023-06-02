@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using R2API.Networking;
 using R2API.Utils;
 using RoR2;
 using RoR2.ContentManagement;
@@ -22,12 +23,13 @@ namespace BulwarksHaunt
     {
         public const string PluginGUID = "com.themysticsword.bulwarkshaunt";
         public const string PluginName = "Bulwark's Haunt";
-        public const string PluginVersion = "1.0.5";
+        public const string PluginVersion = "1.1.2";
 
         public static System.Reflection.Assembly executingAssembly;
         internal static System.Type declaringType;
         internal static PluginInfo pluginInfo;
         internal static BepInEx.Logging.ManualLogSource logger;
+        internal static BepInEx.Configuration.ConfigFile config;
 
         private static AssetBundle _assetBundle;
         public static AssetBundle AssetBundle
@@ -44,10 +46,14 @@ namespace BulwarksHaunt
         {
             pluginInfo = Info;
             logger = Logger;
+            config = Config;
             executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             declaringType = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType;
 
             TMProEffects.Init();
+            GhostWaveSkins.Init();
+
+            NetworkingAPI.RegisterMessageType<BulwarksHauntWaveModifier.SyncWaveModifierActive>();
 
             MysticsRisky2Utils.ContentManagement.ContentLoadHelper.PluginAwakeLoad<MysticsRisky2Utils.BaseAssetTypes.BaseItem>(executingAssembly);
             MysticsRisky2Utils.ContentManagement.ContentLoadHelper.PluginAwakeLoad<MysticsRisky2Utils.BaseAssetTypes.BaseEquipment>(executingAssembly);
@@ -60,8 +66,21 @@ namespace BulwarksHaunt
                 addContentPackProvider(new BulwarksHauntContent());
             };
 
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TeamMoonstorm.MoonstormSharedUtils"))
+            var pluginInfos = BepInEx.Bootstrap.Chainloader.PluginInfos;
+
+            if (pluginInfos.ContainsKey("com.TeamMoonstorm.MoonstormSharedUtils"))
                 AddSceneBlacklist();
+
+            if (pluginInfos.ContainsKey("com.KingEnderBrine.ProperSave"))
+                ProperSaveSupport.Init();
+
+            if (MysticsRisky2Utils.SoftDependencies.SoftDependencyManager.RiskOfOptionsDependency.enabled)
+            {
+                var iconTexture = new Texture2D(2, 2);
+                iconTexture.LoadImage(System.IO.File.ReadAllBytes(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Info.Location), "icon.png")));
+                var iconSprite = Sprite.Create(iconTexture, new Rect(0, 0, iconTexture.width, iconTexture.height), new Vector2(0, 0), 100);
+                MysticsRisky2Utils.SoftDependencies.SoftDependencyManager.RiskOfOptionsDependency.RegisterModInfo(PluginGUID, PluginName, "Adds a new Obelisk ending", iconSprite);
+            }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -188,12 +207,19 @@ namespace BulwarksHaunt
         public static class Items
         {
             public static ItemDef BulwarksHaunt_Sword;
+            public static ItemDef BulwarksHaunt_SwordUnleashed;
             public static ItemDef BulwarksHaunt_GhostFury;
+            public static ItemDef BulwarksHaunt_RecruitedMonster;
         }
 
         public static class GameEndings
         {
             public static GameEndingDef BulwarksHaunt_HauntedEnding;
+        }
+
+        public static class Achievements
+        {
+            public static AchievementDef BulwarksHaunt_WinGhostWave;
         }
     }
 }

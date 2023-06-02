@@ -2,7 +2,7 @@
 Adds an alternate ending.  
 To reach it, find the Crystalline Blade on Sky Meadow and bring it to the Obelisk.  
 Note: the ending is not quick and *will* take some time to complete!  
-Created in 4 days by TheMysticSword (TheMysticSword#9770 on Discord) for the Halloween Modjam 2022, entirely without the use of Thunderkit as an experiment.  
+Version 1.0.0 was created in 4 days by TheMysticSword (TheMysticSword#9770 on Discord) for the Halloween Modjam 2022, entirely without the use of Thunderkit as an experiment.  
   
 ![Bulwark's Grave](https://i.imgur.com/dwe6CVo.png)  
   
@@ -10,7 +10,6 @@ Created in 4 days by TheMysticSword (TheMysticSword#9770 on Discord) for the Hal
 
 # Known Issues
 * Main map terrain has odd triangular shading
-* Not ProperSave-compatible
   
 # Credits
 Sword model by marwan60
@@ -20,6 +19,25 @@ Contains assets from [Poly Haven](https://polyhaven.com/), licensed under CC0 1.
 Contains assets from [ambientCG.com](https://ambientCG.com/), licensed under CC0 1.0 Universal.
 
 # Changelog
+## 1.1.2:
+* Added ProperSave support
+* Added configs
+* Ghosts now spawn around the player instead of choosing random spots
+* Ghosts now have flat extra health
+* Added fallback out-of-bounds zone that teleports players back to surface in case all other out-of-bounds zones fail
+* Fixed Wave Modifier - Calamity not working
+## 1.1.1:
+* Wave modifiers are now properly networked in Multiplayer
+* Added more wave modifiers
+## 1.1.0:
+* Added extra rewards for the ending!
+	* Completing once will add an extra function for the Crystalline Blade
+	* Completing as one of the survivors will unlock a recolour skin for that survivor
+* Added random modifiers that get activated for specific waves
+* Added on-player item displays for the Crystalline Blade
+* Ghost spawns are now a bit more frequent
+* "Wave Complete" message is now more visible
+* Moved out-of-bounds ceiling higher
 ## 1.0.5:
 * Dead players are now respawned after each wave
 * Changed the colour of the ghosts to green to make them distinguishable from Happiest Mask ghosts

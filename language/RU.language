@@ -1,28 +1,116 @@
 {
 	"RU": {
-		"MAP_BULWARKSHAUNT_GHOSTWAVE_NAME": "Скрытое измерение: Проклятый момент",
+		"MAP_BULWARKSHAUNT_GHOSTWAVE_NAME": "Скрытое измерение: Проклятое мгновение",
 		"MAP_BULWARKSHAUNT_GHOSTWAVE_SUBTITLE": "",
 		"MAP_BULWARKSHAUNT_GHOSTWAVE_LORE": "Что случается с теми, кто умирает?\r\n\r\nКто-то говорит, что их души возвышаются на небеса и живут счастливой загробной жизнью среди звёзд. Кто-то даже верит в то, что появления новых звёзд связаны с уходом духов умерших. Какие трогательные мысли, полные надежд, в такие трудные времена.\r\n\r\nКто-то говорит, что абсолютно ничего не происходит, и что этот человек просто... исчезает. Навсегда. И всё. Никаких духов, никаких душ, никакой надежды. Жутко об этом даже думать, не так ли?\r\n\r\nНо ещё более жутко думать об идее странствующих духов. Идее о том, что когда кто-то погибает, их душа продолжает жить и не покидает этот мир, принуждённая смотреть на мир и горевать. И чем дольше они здесь задерживаются, тем большую боль они чувствуют.\r\n\r\nКакие чудовищные мысли могли бы прийти в голову тысячелетним фантомам? А что бы они сделали, обретя они физическое тело?",
 		"BAZAAR_SEER_BULWARKSHAUNT_GHOSTWAVE": "<style=cWorldEvent>Вы испытываете леденящий кровь кошмар.</style>",
-		"UNLOCKABLE_LOG_STAGES_BULWARKSHAUNT_GHOSTWAVE": "Запись об окружении: Проклятый момент",
+		"UNLOCKABLE_LOG_STAGES_BULWARKSHAUNT_GHOSTWAVE": "Запись об окружении: Проклятое мгновение",
 
 		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_CLEARWAVES": "Пройдите <color=#ff6a07>Волну {0}...</color>",
 		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_CLEARWAVES_FINAL": "Пройдите <color=#ff6a07>Последнюю волну!</color>",
 		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_KILLENEMIES": "Одолейте <color=#ff6a07><link=\"BulwarksHauntWavy\">Восставших духов</link></color> ({0}%)",
 		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_WAITFORNEXTWAVE": "Следующая Волна через <color=#ff6a07>{0}</color>",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_MODIFIERACTIVE": "<style=cWorldEvent>Модификатор волны - {0}\r\n{1}</color>",
 
 		"ITEM_BULWARKSHAUNT_SWORD_NAME": "Кристаллическое лезвие",
 		"ITEM_BULWARKSHAUNT_SWORD_PICKUP": "Голоса эхом отдаются в вашей голове, шепча: <link=\"BulwarksHauntWavy\">\"Обелиск... Обелиск...\"</link>",
 		"ITEM_BULWARKSHAUNT_SWORD_DESC": "Голоса эхом отдаются в вашей голове, шепча: <link=\"BulwarksHauntWavy\">\"Обелиск... Обелиск...\"</link>",
 		"ITEM_BULWARKSHAUNT_SWORD_LORE": "<style=cMono>ПРОИГРЫВАЕМ ПЕРЕВЕДЁННОЕ АУДИО...</style>\r\n\r\n\"Но тут так скучно... Можно я лучше пойду поиграю?\"\r\n\r\n\"Цыц, ты! Это редкое событие. Раз в каждые 50 лунных циклов, когда Луна максимально приближается к полю, Он сходит с измерения небес и благословляет нас защитой. ОН, кто вообще создал этот мир для нас! Прояви благодарность!\"\r\n\r\n\"Стоп, Он? Ты про...\"\r\n\r\n\"Да.\"\r\n\r\n\"Ого...\"\r\n\r\n\"И если мы не будем следовать этой традиции, и, в свою очередь, не будем уважать Его, бедствия оклинают нашу землю, Демоны спустятся с небес, и... они всех... мы все...\"\r\n\r\n\"...\"\r\n\r\n\"В смысле... Будет очень плохо. Э-э, то есть... Слушай. Просто не думай об этом.\"\r\n\r\n\"...\"\r\n\r\n\"Извини. Извини меня, пожалуйста. Не плачь.\"\r\n\r\n<style=cMono>КОНЕЦ ПЕРЕВЕДЁННОГО АУДИО</style>",
 
+		"ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_PICKUP": "Активация снаряжения временно нанимает врагов поблизости. <link=\"BulwarksHauntWavy\">Отправляет в иной мир при использовании на Обелиске.</link>",
+		"ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_DESC": "Активация снаряжения <style=cIsUtility>нанимает</style> врагов (не боссов) в <style=cIsUtility>радиусе {Radius}м</style> в вашу команду на <style=cIsUtility>{Duration} <style=cStack>(+{DurationPerStack} за шт.)</style> секунд</style>. <style=cIsUtility><link=\"BulwarksHauntWavy\">Отправляет в иной мир при использовании на Обелиске.</link></style>",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_WINGHOSTWAVE_NAME": "Смертельная ошибка",
+		"ACHIEVEMENT_BULWARKSHAUNT_WINGHOSTWAVE_DESCRIPTION": "Отправьте выжившего в нескончаемые муки, чтобы раскрыть силу Кристаллического лезвия.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_COMMANDOWINGHOSTWAVE_NAME": "Коммандо: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_COMMANDOWINGHOSTWAVE_DESCRIPTION": "Играя за Коммандо, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_HUNTRESSWINGHOSTWAVE_NAME": "Охотница: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_HUNTRESSWINGHOSTWAVE_DESCRIPTION": "Играя за Охотницу, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_BANDIT2WINGHOSTWAVE_NAME": "Бандит: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_BANDIT2WINGHOSTWAVE_DESCRIPTION": "Играя за Бандита, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_TOOLBOTWINGHOSTWAVE_NAME": "МУЛ-Т: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_TOOLBOTWINGHOSTWAVE_DESCRIPTION": "Играя за МУЛ-Т, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_ENGIWINGHOSTWAVE_NAME": "Инженер: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_ENGIWINGHOSTWAVE_DESCRIPTION": "Играя за Инженера, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_MAGEWINGHOSTWAVE_NAME": "Изобретатель: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_MAGEWINGHOSTWAVE_DESCRIPTION": "Играя за Изобретателя, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_MERCWINGHOSTWAVE_NAME": "Наёмник: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_MERCWINGHOSTWAVE_DESCRIPTION": "Играя за Наёмника, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_TREEBOTWINGHOSTWAVE_NAME": "РЕКС: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_TREEBOTWINGHOSTWAVE_DESCRIPTION": "Играя за РЕКСа, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_LOADERWINGHOSTWAVE_NAME": "Погрузчица: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_LOADERWINGHOSTWAVE_DESCRIPTION": "Играя за Погрузчицу, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_CROCOWINGHOSTWAVE_NAME": "Акрид: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_CROCOWINGHOSTWAVE_DESCRIPTION": "Играя за Акрида, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_CAPTAINWINGHOSTWAVE_NAME": "Капитан: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_CAPTAINWINGHOSTWAVE_DESCRIPTION": "Играя за Капитана, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_RAILGUNNERWINGHOSTWAVE_NAME": "Рельсотронщица: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_RAILGUNNERWINGHOSTWAVE_DESCRIPTION": "Играя за Рельсотронщицу, переживите натиск духов в Проклятом мгновении.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_VOIDSURVIVORWINGHOSTWAVE_NAME": "Худший персонаж: Дух победы",
+		"ACHIEVEMENT_BULWARKSHAUNT_VOIDSURVIVORWINGHOSTWAVE_DESCRIPTION": "Играя за 「Исчадие Пу??стоты』, переживите натиск духов в Проклятом мгновении.",
+
+		"GENERIC_SKIN_BULWARKSHAUNT_ALT_NAME": "Гуль",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_POPUP_TITLE": "Модификатор волны - {0}",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_COLD_NAME": "Мороз",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_COLD_DESCRIPTION": "Атаки врагов замедляют вас.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_SLOWATTACKSPEED_NAME": "Оцепенение",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_SLOWATTACKSPEED_DESCRIPTION": "Скорость атаки уменьшена.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_STONE_NAME": "Крепость",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_STONE_DESCRIPTION": "В два раза больше здоровья, в два раза меньше урона.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_NOSPECIAL_NAME": "Помехи",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_NOSPECIAL_DESCRIPTION": "Время восстановления особого навыка намного дольше.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_METEORS_NAME": "Бедствие",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_METEORS_DESCRIPTION": "На поле боя обрушивается дождь из метеоров.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_UNLUCKY_NAME": "Отчаяние",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_UNLUCKY_DESCRIPTION": "Удача уменьшена.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_VOIDINVASION_NAME": "Оппозиция",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_VOIDINVASION_DESCRIPTION": "В измерение вторгаются Разбойники Пустоты.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_HIGHGRAVITY_NAME": "Вес",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_HIGHGRAVITY_DESCRIPTION": "Высота прыжка уменьшена.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_BADHEALING_NAME": "Недомогание",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_BADHEALING_DESCRIPTION": "Лечение намного слабее.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_FASTERSPAWNS_NAME": "Спешка",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_FASTERSPAWNS_DESCRIPTION": "Восставшие духи появляются намного чаще.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_EVERYONEFASTER_NAME": "Тахисенсия",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_EVERYONEFASTER_DESCRIPTION": "Вы и враги передвигаетесь и атакуете быстрее.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_ENEMYDODGE_NAME": "Неуверенность",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_ENEMYDODGE_DESCRIPTION": "Атаки имеют шанс промахнуться.",
+
 		"BODY_MODIFIER_BULWARKSHAUNT_GHOSTFURY": "{0}-призрак",
+		"BODY_MODIFIER_BULWARKSHAUNT_RECRUITED": "{0}-последователь",
 
 		"BULWARKSHAUNT_SWORDOBJ_NAME": "Могила Оплота",
 		"BULWARKSHAUNT_SWORDOBJ_CONTEXT": "Осквернить",
 
-		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVECLEAR": "<style=cStack>(Волна пройдена! +{0} Лунных монет.)</style>",
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVECLEAR": "<style=cWorldEvent>Волна пройдена! +{0} Лунных монет.</style>",
 		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVEFALLBACK": "<style=cStack>(Вы не убили ни одного врага на этапе {0}. Вместо этого добавляем призраков случайных врагов...)</style>",
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVEMODIFIER": "<style=cWorldEvent>Активирован модификатор волны: {0}...</style>",
 
 		"BULWARKSHAUNT_GHOSTWAVE_VOICE_FORMAT": "<color=#ffcdc6><size=120%>???: {0}</color></size>",
 
