@@ -23,6 +23,13 @@ namespace BulwarksHaunt.Items
             On.RoR2.CharacterBody.OnInventoryChanged += CharacterBody_OnInventoryChanged;
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
             On.RoR2.Util.GetBestBodyName += Util_GetBestBodyName;
+            On.RoR2.HealthComponent.Heal += HealthComponent_Heal;
+        }
+
+        private float HealthComponent_Heal(On.RoR2.HealthComponent.orig_Heal orig, HealthComponent self, float amount, ProcChainMask procChainMask, bool nonRegen)
+        {
+            if (self.body && self.body.inventory && self.body.inventory.GetItemCount(itemDef) > 0) return 0;
+            return orig(self, amount, procChainMask, nonRegen);
         }
 
         private string Util_GetBestBodyName(On.RoR2.Util.orig_GetBestBodyName orig, GameObject bodyObject)
