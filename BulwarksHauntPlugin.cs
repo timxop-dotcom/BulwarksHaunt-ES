@@ -30,7 +30,7 @@ namespace BulwarksHaunt
     {
         public const string PluginGUID = "com.themysticsword.bulwarkshaunt";
         public const string PluginName = "Bulwark's Haunt";
-        public const string PluginVersion = "1.1.2";
+        public const string PluginVersion = "1.1.3";
 
         public static System.Reflection.Assembly executingAssembly;
         internal static System.Type declaringType;
