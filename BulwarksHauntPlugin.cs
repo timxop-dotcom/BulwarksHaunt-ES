@@ -1,4 +1,6 @@
 ﻿using BepInEx;
+using MysticsRisky2Utils;
+using R2API;
 using R2API.Networking;
 using R2API.Utils;
 using RoR2;
@@ -16,7 +18,12 @@ using UnityEngine;
 namespace BulwarksHaunt
 {
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
-    [BepInDependency(MysticsRisky2Utils.MysticsRisky2UtilsPlugin.PluginGUID, BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency(R2API.R2API.PluginGUID)]
+    [BepInDependency(LanguageAPI.PluginGUID)]
+    [BepInDependency(NetworkingAPI.PluginGUID)]
+    [BepInDependency(PrefabAPI.PluginGUID)]
+    [BepInDependency(RecalculateStatsAPI.PluginGUID)]
+    [BepInDependency(MysticsRisky2UtilsPlugin.PluginGUID)]
     [BepInDependency("com.TeamMoonstorm.MoonstormSharedUtils", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class BulwarksHauntPlugin : BaseUnityPlugin
