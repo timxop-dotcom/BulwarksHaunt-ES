@@ -27,6 +27,19 @@ namespace BulwarksHaunt.Items
                 "ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_DESC"
             }
         );
+        public static ConfigOptions.ConfigurableValue<float> radiusPerStack = ConfigOptions.ConfigurableValue.CreateFloat(
+            BulwarksHauntPlugin.PluginGUID,
+            BulwarksHauntPlugin.PluginName,
+            BulwarksHauntPlugin.config,
+            "Unleashed Blade",
+            "RadiusPerStack",
+            5f,
+            description: "How large should the radius of the recruitment effect be for each additional stack of this item (in meters)",
+            stringsToAffect: new System.Collections.Generic.List<string>()
+            {
+                "ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_DESC"
+            }
+        );
         public static ConfigOptions.ConfigurableValue<float> duration = ConfigOptions.ConfigurableValue.CreateFloat(
             BulwarksHauntPlugin.PluginGUID,
             BulwarksHauntPlugin.PluginName,
@@ -109,14 +122,15 @@ namespace BulwarksHaunt.Items
                 {
                     var currentPosition = self.GetAimRay().origin;
                     var myTeamIndex = self.teamComponent.teamIndex;
-                    var radiusSqr = radius * radius;
+                    var currentRadius = radius + radiusPerStack * (float)(itemCount - 1);
+                    var currentRadiusSqr = currentRadius * currentRadius;
 
                     if (useEffect)
                     {
                         EffectManager.SpawnEffect(useEffect, new EffectData
                         {
                             origin = currentPosition,
-                            scale = radius
+                            scale = currentRadius
                         }, false);
                     }
 
@@ -128,7 +142,7 @@ namespace BulwarksHaunt.Items
                             foreach (TeamComponent teamComponent in teamMembers)
                             {
                                 Vector3 vector = teamComponent.transform.position - currentPosition;
-                                if (vector.sqrMagnitude <= radiusSqr)
+                                if (vector.sqrMagnitude <= currentRadiusSqr)
                                 {
                                     CharacterBody body = teamComponent.GetComponent<CharacterBody>();
                                     if (body && !body.isBoss && body.master)
@@ -160,7 +174,7 @@ namespace BulwarksHaunt.Items
             itemDef.loreToken = "ITEM_BULWARKSHAUNT_SWORD_LORE";
         }
 
-        public class BulwarksHauntSwordTeamHijack : MonoBehaviour
+        public class BulwarksHauntSwordTeamHijack : MonoBehaviour, ILifeBehavior
         {
             public TeamIndex oldTeamIndex;
             public CharacterBody body;
@@ -176,10 +190,20 @@ namespace BulwarksHaunt.Items
                 timer -= Time.fixedDeltaTime;
                 if (timer <= 0f)
                 {
-                    SetTeam(oldTeamIndex);
-                    if (body.inventory) body.inventory.RemoveItem(BulwarksHauntContent.Items.BulwarksHaunt_RecruitedMonster);
+                    Undo();
                     Destroy(this);
                 }
+            }
+
+            public void OnDeathStart()
+            {
+                Undo();
+            }
+
+            public void Undo()
+            {
+                SetTeam(oldTeamIndex);
+                if (body.inventory) body.inventory.RemoveItem(BulwarksHauntContent.Items.BulwarksHaunt_RecruitedMonster);
             }
 
             public void SetTeam(TeamIndex teamIndex)
