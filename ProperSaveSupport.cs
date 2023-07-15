@@ -11,7 +11,7 @@ namespace BulwarksHaunt
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void Init()
         {
-            ProperSave.SaveFile.OnGatgherSaveData += SaveFile_OnGatgherSaveData;
+            ProperSave.SaveFile.OnGatherSaveData += SaveFile_OnGatherSaveData;
             ProperSave.Loading.OnLoadingEnded += Loading_OnLoadingEnded;
         }
 
@@ -129,7 +129,7 @@ namespace BulwarksHaunt
             }
         }
 
-        private static void SaveFile_OnGatgherSaveData(Dictionary<string, object> obj)
+        private static void SaveFile_OnGatherSaveData(Dictionary<string, object> obj)
         {
             obj.Add("BulwarksHaunt_SaveData", new BulwarksHauntSaveData());
         }
