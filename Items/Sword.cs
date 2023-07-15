@@ -78,6 +78,14 @@ namespace BulwarksHaunt.Items
         {
             if (Util.GetItemCountForTeam(TeamIndex.Player, itemDef.itemIndex, false) > 0 || Util.GetItemCountForTeam(TeamIndex.Player, BulwarksHauntContent.Items.BulwarksHaunt_SwordUnleashed.itemIndex, false) > 0)
             {
+                foreach (var master in CharacterMaster.readOnlyInstancesList)
+                {
+                    if (master.teamIndex == TeamIndex.Player)
+                    {
+                        master.inventory.RemoveItem(itemDef, master.inventory.GetItemCount(itemDef));
+                        master.inventory.RemoveItem(BulwarksHauntContent.Items.BulwarksHaunt_SwordUnleashed, master.inventory.GetItemCount(BulwarksHauntContent.Items.BulwarksHaunt_SwordUnleashed));
+                    }
+                }
                 self.outer.SetNextState(new TransitionToGhostWave());
                 return;
             }
