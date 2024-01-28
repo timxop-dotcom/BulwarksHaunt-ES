@@ -1,3 +1,5 @@
+## 1.1.4:
+* Fixed certain null object reference checks
 ## 1.1.3:
 * The Crystalline Blade is now consumed upon entering the realm
 * Enemies affected by Crystalline Blade (Unleashed) no longer receive healing
