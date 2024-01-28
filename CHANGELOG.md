@@ -1,5 +1,9 @@
 ## 1.1.4:
+* Ghost Bonus Stats can now be configured
+* Reduced ghost bonus armor from 40 to 20
+* Added Brazilian Portuguese translation by Kauzok
 * Fixed certain null object reference checks
+* Reduced prebaked nodegraph file size
 ## 1.1.3:
 * The Crystalline Blade is now consumed upon entering the realm
 * Enemies affected by Crystalline Blade (Unleashed) no longer receive healing
