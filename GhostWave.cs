@@ -1,3 +1,5 @@
+#undef BAKE_NODES_AT_RUNTIME
+
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MysticsRisky2Utils;
@@ -51,7 +53,6 @@ namespace BulwarksHaunt
             NetworkingAPI.RegisterMessageType<GhostWaveControllerBaseState.MonsterWaves.SyncKilledEnemies>();
         }
 
-        public static bool bakeNodesAtRuntime = false;
         public struct BakedNodes
         {
             public NodeSerialized[] nodes;
@@ -73,11 +74,10 @@ namespace BulwarksHaunt
 
         public override void Load()
         {
-            if (bakeNodesAtRuntime)
-            {
-                On.RoR2.Navigation.MapNodeGroup.Bake += MapNodeGroup_Bake1;
-                IL.RoR2.Navigation.MapNodeGroup.Bake += MapNodeGroup_Bake;
-            }
+#if BAKE_NODES_AT_RUNTIME
+            On.RoR2.Navigation.MapNodeGroup.Bake += MapNodeGroup_Bake1;
+            IL.RoR2.Navigation.MapNodeGroup.Bake += MapNodeGroup_Bake;
+#endif
 
             SetUpStage();
             SetUpGameEnding();
@@ -151,7 +151,7 @@ namespace BulwarksHaunt
             sceneDef.suppressPlayerEntry = false;
             sceneDef.validForRandomSelection = false;
 
-            if (bakeNodesAtRuntime)
+#if BAKE_NODES_AT_RUNTIME
             {
                 // Create Ground NodeGraph
                 var go = Utils.CreateBlankPrefab("BulwarksHaunt_GhostWaveGroundNodeGroup");
@@ -220,12 +220,18 @@ namespace BulwarksHaunt
                     {
                         Culture = System.Globalization.CultureInfo.InvariantCulture
                     });
-                    System.IO.File.WriteAllBytes(System.IO.Path.Combine(path, "BakedNodeGraph_" + sceneDef.baseSceneName + "_" + groupTypeStr + ""), new UTF8Encoding().GetBytes(encodedNodeGraph));
+                    var fileStream = System.IO.File.Create(System.IO.Path.Combine(path, "BakedNodeGraph_" + sceneDef.baseSceneName + "_" + groupTypeStr));
+                    using (var output = new System.IO.Compression.GZipStream(fileStream, System.IO.Compression.CompressionMode.Compress))
+                    {
+                        var byteArray = new UTF8Encoding().GetBytes(encodedNodeGraph);
+                        output.Write(byteArray, 0, byteArray.Length);
+                    }
+                    fileStream.Close();
                 }
                 SaveBakedNodesToFile(groundNodeGroup, groundNodeGraph);
                 SaveBakedNodesToFile(airNodeGroup, airNodeGraph);
             }
-            else
+#else
             {
                 var loadingTimestamp = System.DateTime.Now;
                 BulwarksHauntPlugin.logger.LogMessage("Loading prebaked nodes...");
@@ -236,11 +242,19 @@ namespace BulwarksHaunt
                     if (graphType == MapNodeGroup.GraphType.Air) groupTypeStr = "Air";
 
                     var path = System.IO.Path.GetDirectoryName(BulwarksHauntPlugin.pluginInfo.Location);
-                    var encodedNodeGraph = new UTF8Encoding().GetString(System.IO.File.ReadAllBytes(System.IO.Path.Combine(path, "BakedNodeGraph_" + sceneDef.baseSceneName + "_" + groupTypeStr)));
-                    var decodedNodeGraph = JsonConvert.DeserializeObject<BakedNodes>(encodedNodeGraph, new JsonSerializerSettings
+                    var fileStream = System.IO.File.OpenRead(System.IO.Path.Combine(path, "BakedNodeGraph_" + sceneDef.baseSceneName + "_" + groupTypeStr));
+                    var encodedNodeGraph = new System.IO.MemoryStream();
+                    using (var input = new System.IO.Compression.GZipStream(fileStream, System.IO.Compression.CompressionMode.Decompress))
+                    {
+                        input.CopyTo(encodedNodeGraph);
+                    }
+                    var decodedNodeGraph = JsonConvert.DeserializeObject<BakedNodes>(new UTF8Encoding().GetString(encodedNodeGraph.GetBuffer()), new JsonSerializerSettings
                     {
                         Culture = System.Globalization.CultureInfo.InvariantCulture
                     });
+                    fileStream.Close();
+                    encodedNodeGraph.Close();
+
                     var properNodeGraph = ScriptableObject.CreateInstance<NodeGraph>();
                     properNodeGraph.Clear();
                     properNodeGraph.nodes = decodedNodeGraph.nodes.Select((x) =>
@@ -287,6 +301,7 @@ namespace BulwarksHaunt
 
                 BulwarksHauntPlugin.logger.LogMessage("Loaded baked nodes! " + System.DateTime.Now.Subtract(loadingTimestamp).TotalSeconds + "s elapsed");
             }
+#endif
 
             // Create enemy pools
             dccsBulwarksHaunt_GhostWaveMonsters = ScriptableObject.CreateInstance<DirectorCardCategorySelection>();
