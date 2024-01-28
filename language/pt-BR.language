@@ -1,0 +1,178 @@
+{
+	"pt-BR": {
+		"MAP_BULWARKSHAUNT_GHOSTWAVE_NAME": "Reino Secreto: Momento Assombrado",
+		"MAP_BULWARKSHAUNT_GHOSTWAVE_SUBTITLE": "",
+		"MAP_BULWARKSHAUNT_GHOSTWAVE_LORE": "O que acontece quando alguém morre?\r\n\r\nAlguns dizem que suas almas ascendem ao pós-vida e eles vivem uma vida feliz entre as estrelas. Alguns acreditam que o nascimento de uma estrela está atrelado ao espírito de alguém falecido. Que acolhedor, um pensamento positivo em tempos difíceis.\r\n\r\nAlguns dizem que absolutamente nada acontece, e a pessoa simplesmente... desaparece. Para sempre. E é isso. Sem espíritos, sem almas, sem esperança. Um terrível destino, não é?\r\n\r\nMas, o que é ainda mais terrível é a ideia de espíritos errantes. A ideia de que, quando alguém morre, sua alma continuará viva e não poderá sair deste mundo, forçada a assistir e lamentar seu mundo. E, a medida em que permanecem, mais forte é a dor.\r\n\r\nQue pensamentos monstruosos devem atravessar a mente de fantasmas milenares? O que eles fariam se conseguissem novamente um corpo físico?",
+		"BAZAAR_SEER_BULWARKSHAUNT_GHOSTWAVE": "<style=cWorldEvent>Você experenciou um pesadelo horripilante.</style>",
+		"UNLOCKABLE_LOG_STAGES_BULWARKSHAUNT_GHOSTWAVE": "Registro de Cenário: Momento Assombrado",
+
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_CLEARWAVES": "Vença a <color=#ff6a07>{0}ª Onda...</color>",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_CLEARWAVES_FINAL": "Vença a <color=#ff6a07>Última Onda!</color>",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_KILLENEMIES": "Derrote os <color=#ff6a07><link=\"BulwarksHauntWavy\">Espíritos Ressurgentes</link></color> ({0}%)",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_WAITFORNEXTWAVE": "Próxima onda em <color=#ff6a07>{0}</color>",
+		"OBJECTIVE_BULWARKSHAUNT_GHOSTWAVE_MODIFIERACTIVE": "<style=cWorldEvent>Modificador da Onda - {0}\r\n{1}</color>",
+
+		"ITEM_BULWARKSHAUNT_SWORD_NAME": "Lâmina Cristalina",
+		"ITEM_BULWARKSHAUNT_SWORD_PICKUP": "Vozes ecoam em sua mente, elas sussuram: <link=\"BulwarksHauntWavy\">\"o Obelisco... o Obelisco...\"</link>",
+		"ITEM_BULWARKSHAUNT_SWORD_DESC": "Vozes ecoam em sua mente, elas sussuram: <link=\"BulwarksHauntWavy\">\"o Obelisco... o Obelisco...\"</link>",
+		"ITEM_BULWARKSHAUNT_SWORD_LORE": "<style=cMono>TOCANDO ÁUDIO TRADUZIDO...</style>\r\n\r\n\"Mas, é tão entediante aqui... Não posso ir brincar?\"\r\n\r\n\"Silêncio! Essa é uma rara ocasião. Um vez a cada 50 ciclos lunares, quando a Lua se aproxima da campina, Ele desce de um reino além do nosso e nos abençoa com sua proteção. ELE, quem criou esse mundo para nós para início de conversa! Seja grato!\"\r\n\r\n\"Espere, Ele? Você quer dizer...\"\r\n\r\n\"Sim.\"\r\n\r\n\"Wow...\"\r\n\r\n\"E se não respeitarmos sua tradição, e, consequentemente, não o respeitarmos, calamidades estão destinadas a manchar nossa terra, Demônios irão vir dos céus, e... eles vão... nós iremos...\"\r\n\r\n\"...\"\r\n\r\n\"Bem... será ruim. Er, quer dizer... Ouça. Não pense muito nisso.\"\r\n\r\n\"...\"\r\n\r\n\"Me desculpe. Me desculpe mesmo. Por favor, não chore.\"\r\n\r\n<style=cMono>FIM DA TRADUÇÃO DO ÁUDIO</style>",
+
+		"ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_PICKUP": "Ativar um equipamento recruta temporariamente inimigos próximos. <link=\"BulwarksHauntWavy\">Envia para o reino além se usado no Obelisco.</link>",
+		"ITEM_BULWARKSHAUNT_SWORD_UNLEASHED_DESC": "Ativar um equipamento <style=cIsUtility>recruta</style> inimigos não-chefes em um raio de <style=cIsUtility>{Radius} m <style=cStack>(+{RadiusPerStack} m por acúmulo)</style></style> por <style=cIsUtility>{Duration} <style=cStack>(+{DurationPerStack} por acúmulo)</style> segundos</style>. <style=cIsUtility><link=\"BulwarksHauntWavy\">Envia para o reino além se usado no Obelisco.</link></style>",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_WINGHOSTWAVE_NAME": "Grave Erro",
+		"ACHIEVEMENT_BULWARKSHAUNT_WINGHOSTWAVE_DESCRIPTION": "Envie um sobrevivente ao sofrimento eterno para despertar o poder da Lâmina Cristalina.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_COMMANDOWINGHOSTWAVE_NAME": "Comando: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_COMMANDOWINGHOSTWAVE_DESCRIPTION": "Como Comando, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_HUNTRESSWINGHOSTWAVE_NAME": "Caçadora: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_HUNTRESSWINGHOSTWAVE_DESCRIPTION": "Como Caçadora, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_BANDIT2WINGHOSTWAVE_NAME": "Bandido: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_BANDIT2WINGHOSTWAVE_DESCRIPTION": "Como Bandido, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_TOOLBOTWINGHOSTWAVE_NAME": "MUL-T: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_TOOLBOTWINGHOSTWAVE_DESCRIPTION": "Como MUL-T, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_ENGIWINGHOSTWAVE_NAME": "Engenheiro: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_ENGIWINGHOSTWAVE_DESCRIPTION": "Como Engenheiro, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_MAGEWINGHOSTWAVE_NAME": "Artífice: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_MAGEWINGHOSTWAVE_DESCRIPTION": "Como Artífice, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_MERCWINGHOSTWAVE_NAME": "Mercenário: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_MERCWINGHOSTWAVE_DESCRIPTION": "Como Mercenário, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_TREEBOTWINGHOSTWAVE_NAME": "REX: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_TREEBOTWINGHOSTWAVE_DESCRIPTION": "Como REX, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_LOADERWINGHOSTWAVE_NAME": "Carregadeira: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_LOADERWINGHOSTWAVE_DESCRIPTION": "Como Carregadeira, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_CROCOWINGHOSTWAVE_NAME": "Acrid: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_CROCOWINGHOSTWAVE_DESCRIPTION": "Como Acrid, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_CAPTAINWINGHOSTWAVE_NAME": "Capitão: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_CAPTAINWINGHOSTWAVE_DESCRIPTION": "Como Capitão, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_RAILGUNNERWINGHOSTWAVE_NAME": "Canhoneira: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_RAILGUNNERWINGHOSTWAVE_DESCRIPTION": "Como Canhoneira, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"ACHIEVEMENT_BULWARKSHAUNT_VOIDSURVIVORWINGHOSTWAVE_NAME": "「Demônio N??ulo』: Triunfo Espiritual",
+		"ACHIEVEMENT_BULWARKSHAUNT_VOIDSURVIVORWINGHOSTWAVE_DESCRIPTION": "Como 「Demônio N??ulo』, sobreviva ao ataque dos espíritos em Momento Assombrado.",
+
+		"GENERIC_SKIN_BULWARKSHAUNT_ALT_NAME": "Carniçal",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_POPUP_TITLE": "Modificador de Onda - {0}",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_COLD_NAME": "Congelamento",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_COLD_DESCRIPTION": "Acertos de inimigos desaceleram você.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_SLOWATTACKSPEED_NAME": "Rigor",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_SLOWATTACKSPEED_DESCRIPTION": "Velocidade de ataque reduzida.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_STONE_NAME": "Fortaleza",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_STONE_DESCRIPTION": "Saúde dobrada, dano pela metade.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_NOSPECIAL_NAME": "Interferência",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_NOSPECIAL_DESCRIPTION": "Tempo de recarga da Habilidade Especial aumentado significativamente.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_METEORS_NAME": "Calamidade",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_METEORS_DESCRIPTION": "Uma chuva de meteoros atinge o campo de batalha.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_UNLUCKY_NAME": "Desespero",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_UNLUCKY_DESCRIPTION": "Sorte reduzida.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_VOIDINVASION_NAME": "Oposição",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_VOIDINVASION_DESCRIPTION": "Devastadores Astrais invadem o reino.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_HIGHGRAVITY_NAME": "Pesado",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_HIGHGRAVITY_DESCRIPTION": "Altura do pulo reduzida.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_BADHEALING_NAME": "Mal-estar",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_BADHEALING_DESCRIPTION": "Cura torna-se significamente mais fraca.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_FASTERSPAWNS_NAME": "Ímpeto",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_FASTERSPAWNS_DESCRIPTION": "Espíritos Ressurgentes aparecem com muito mais frequência.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_EVERYONEFASTER_NAME": "Taquissênsia",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_EVERYONEFASTER_DESCRIPTION": "Você e os inimigos movem-se e atacam mais rapidamente.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_ENEMYDODGE_NAME": "Insegurança",
+		"BULWARKSHAUNT_GHOSTWAVE_MODIFIER_ENEMYDODGE_DESCRIPTION": "Ataques possuem uma chance de errar.",
+
+		"BODY_MODIFIER_BULWARKSHAUNT_GHOSTFURY": "Fantasma de {0}",
+		"BODY_MODIFIER_BULWARKSHAUNT_RECRUITED": "Seguidor {0}",
+
+		"BULWARKSHAUNT_SWORDOBJ_NAME": "Túmulo do Baluarte",
+		"BULWARKSHAUNT_SWORDOBJ_CONTEXT": "Desfiladeiro",
+
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVECLEAR": "<style=cWorldEvent>Onda Concluída! + {0} Moedas Lunares.</style>",
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVEFALLBACK": "<style=cStack>(Você não abateu inimigos na fase {0}. Adicionando fantasmas de inimigos aleatórios no lugar...)</style>",
+		"BULWARKSHAUNT_GHOSTWAVE_SYSTEM_WAVEMODIFIER": "<style=cWorldEvent>Modificador de Onda Ativo: {0}...</style>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_VOICE_FORMAT": "<color=#ffcdc6><size=120%>???: {0}</color></size>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_1": "Seu... <link=\"BulwarksHauntShaky\">monstro...</link>",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_2": "Você, cujos parentes invadem nosso lar... Você, que implacavelmente assassina os inocentes...",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_3": "<link=\"BulwarksHauntShaky\">VOCÊ</link>, que sente alegria em trazer o sofrimento...",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_4": "...deve agora encarar a consequência de suas ações.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_5": "Cada criature que você assassinou... Cada alma que você feriu...",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_6": "Deverão <link=\"BulwarksHauntShaky\">torturar</link> seu espírito.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_1_7": "Eu não devo intervir, pois não desejo tirar o prazer deles.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_1": "Assassino. Parasita. PESTE. <link=\"BulwarksHauntShaky\">Verme</link> desprezível.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_2": "Você tem coragem de vir ao nosso plano... O plano superior.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_3": "Eu não irei tolerar intrusos, e nem aquelas almas cujas vidas foram tomadas.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_4": "Cada um deles esperou ansiosamente a sua punição.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_2_5": "E o tempo para retribuir é agora. Pague seus pecados, <link=\"BulwarksHauntShaky\">monstro.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_1": "Sua chegada aqui é... inesperada.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_2": "No entanto, é bem-vinda.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_3": "A medida em que os fantasmas daqueles que você matou anseiam por vingança.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_4": "<link=\"BulwarksHauntShaky\">Cada um deles</link> esperou muito tempo para sua morte.",
+		"BULWARKSHAUNT_GHOSTWAVE_INTRO_3_5": "E parece que a hora de você morrer <link=\"BulwarksHauntShaky\">chegou</link>, monstro.",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_1": "Qual o propósito da sua chegada?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_2": "Veio abastecer sua sanguinolência?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_3": "Você acha isso divertido?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_4": "... Eu não esperava uma resposta diferente.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_5": "Ao ver que você tem uma mente deturpada.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_6": "Um ser de alma podre.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_1_7": "A verdade é que você não é melhor que <link=\"BulwarksHauntShaky\">ele.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_1": "O que te motiva com todas essas crueldades?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_2": "É a abundância de alma em seu corpo?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_3": "... ou a falta dela?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_4": "Quer ser peculiar é você.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_5": "É uma pena que eu não tenha vivido para ver o resto de vocês.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_6": "No entanto, talvez seja para o melhor.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_2_7": "Prefiro morrer como um guerreiro do que morrer de <link=\"BulwarksHauntShaky\">desgosto.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_1": "Pense neles por um momento.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_2": "Eles viviam vidas perfeitas.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_3": "Eles tinham amigos, famílias.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_4": "Eles tinham a dádiva da vida.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_5": "Assim como você.",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_6": "O que te faz pensar que você tem o direito de tirar isso deles?",
+		"BULWARKSHAUNT_GHOSTWAVE_WAVECLEAR_3_7": "O que te faz pensar que você é <link=\"BulwarksHauntShaky\">melhor que eles?</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_1_1": "Horripilante.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_1_2": "Sua brutalidade não tem limites.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_1_3": "<link=\"BulwarksHauntShaky\">Você se tornará um espírito maravilhoso...</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_2_1": "Que espírito abrasador, ardente e cheio de ódio.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_2_2": "Seria apenas apropriado...",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_2_3": "<link=\"BulwarksHauntShaky\">... tornar você um deles.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_3_1": "Você matou todos eles - novamente.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_3_2": "Eu presumo que você esteja esperando uma recompensa por seus atos pecaminosos.",
+		"BULWARKSHAUNT_GHOSTWAVE_WIN_3_3": "<link=\"BulwarksHauntShaky\">Aqui. Você será um com os espíritos.</link>",
+
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_1": "Finalmente.",
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_2": "Adeus, monstro.",
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_3": "Uma fração da dor que você causou.",
+		"BULWARKSHAUNT_GHOSTWAVE_LOSS_4": "Morra - em seu caixão adornado."
+	}
+}
