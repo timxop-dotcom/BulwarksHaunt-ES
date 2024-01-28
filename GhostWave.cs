@@ -1164,7 +1164,7 @@ namespace BulwarksHaunt
                         if (aliveEnemies.Count <= 3 && spawnTimer > 0.1f && spawnBatchCurrent <= 0) spawnTimer = 0.1f;
                     }
 
-                    if (damageReport.victimMaster?.playerCharacterMasterController != null)
+                    if (damageReport.victimMaster && damageReport.victimMaster.playerCharacterMasterController != null)
                     {
                         if (NetworkServer.active)
                         {

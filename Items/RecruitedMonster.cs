@@ -35,10 +35,13 @@ namespace BulwarksHaunt.Items
         private string Util_GetBestBodyName(On.RoR2.Util.orig_GetBestBodyName orig, GameObject bodyObject)
         {
             var result = orig(bodyObject);
-            CharacterBody characterBody = bodyObject?.GetComponent<CharacterBody>();
-            if (characterBody && characterBody.inventory && characterBody.inventory.GetItemCount(itemDef) > 0)
+            if (bodyObject)
             {
-                result = Language.GetStringFormatted("BODY_MODIFIER_BULWARKSHAUNT_RECRUITED", result);
+                var characterBody = bodyObject.GetComponent<CharacterBody>();
+                if (characterBody && characterBody.inventory && characterBody.inventory.GetItemCount(itemDef) > 0)
+                {
+                    result = Language.GetStringFormatted("BODY_MODIFIER_BULWARKSHAUNT_RECRUITED", result);
+                }
             }
             return result;
         }
@@ -72,12 +75,15 @@ namespace BulwarksHaunt.Items
 
             public void Start()
             {
-                model = body.modelLocator?.modelTransform?.GetComponent<CharacterModel>();
-                if (model)
+                if (body && body.modelLocator && body.modelLocator.modelTransform)
                 {
-                    var matHelper = model.GetComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
-                    if (!matHelper) matHelper = model.gameObject.AddComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
-                    matHelper.matActive = true;
+                    model = body.modelLocator.modelTransform.GetComponent<CharacterModel>();
+                    if (model)
+                    {
+                        var matHelper = model.GetComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
+                        if (!matHelper) matHelper = model.gameObject.AddComponent<BulwarksHauntRecruitedMonsterModelMaterialHelper>();
+                        matHelper.matActive = true;
+                    }
                 }
             }
 
