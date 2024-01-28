@@ -8,6 +8,61 @@ namespace BulwarksHaunt.Items
 {
     public class GhostFury : BaseItem
     {
+        public static ConfigOptions.ConfigurableValue<float> baseHealth = ConfigOptions.ConfigurableValue.CreateFloat(
+            BulwarksHauntPlugin.PluginGUID,
+            BulwarksHauntPlugin.PluginName,
+            BulwarksHauntPlugin.config,
+            "Ghost Bonus Stats",
+            "Base Health",
+            160f,
+            description: "How much flat HP should ghosts get"
+        );
+        public static ConfigOptions.ConfigurableValue<float> baseHealthPerLevel = ConfigOptions.ConfigurableValue.CreateFloat(
+            BulwarksHauntPlugin.PluginGUID,
+            BulwarksHauntPlugin.PluginName,
+            BulwarksHauntPlugin.config,
+            "Ghost Bonus Stats",
+            "Base Health Per Level",
+            48f,
+            description: "How much flat HP should ghosts get for each level"
+        );
+        public static ConfigOptions.ConfigurableValue<float> armor = ConfigOptions.ConfigurableValue.CreateFloat(
+            BulwarksHauntPlugin.PluginGUID,
+            BulwarksHauntPlugin.PluginName,
+            BulwarksHauntPlugin.config,
+            "Ghost Bonus Stats",
+            "Armor",
+            20f,
+            description: "How much armor should ghosts get"
+        );
+        public static ConfigOptions.ConfigurableValue<float> attackSpeed = ConfigOptions.ConfigurableValue.CreateFloat(
+            BulwarksHauntPlugin.PluginGUID,
+            BulwarksHauntPlugin.PluginName,
+            BulwarksHauntPlugin.config,
+            "Ghost Bonus Stats",
+            "Attack Speed",
+            10f,
+            description: "How much attack speed should ghosts get (in %)"
+        );
+        public static ConfigOptions.ConfigurableValue<float> moveSpeed = ConfigOptions.ConfigurableValue.CreateFloat(
+            BulwarksHauntPlugin.PluginGUID,
+            BulwarksHauntPlugin.PluginName,
+            BulwarksHauntPlugin.config,
+            "Ghost Bonus Stats",
+            "Move Speed",
+            25f,
+            description: "How much movement speed should ghosts get (in %)"
+        );
+        public static ConfigOptions.ConfigurableValue<float> cooldownReduction = ConfigOptions.ConfigurableValue.CreateFloat(
+            BulwarksHauntPlugin.PluginGUID,
+            BulwarksHauntPlugin.PluginName,
+            BulwarksHauntPlugin.config,
+            "Ghost Bonus Stats",
+            "Cooldown Reduction",
+            20f,
+            description: "How much skill cooldown reduction should ghosts get (in %)"
+        );
+
         public override void OnLoad()
         {
             base.OnLoad();
@@ -48,11 +103,11 @@ namespace BulwarksHaunt.Items
                 var itemCount = sender.inventory.GetItemCount(itemDef);
                 if (itemCount > 0)
                 {
-                    args.baseHealthAdd += 160f * (1f + 0.3f * (sender.level - 1f));
-                    args.armorAdd += 40f;
-                    args.attackSpeedMultAdd += 0.1f;
-                    args.moveSpeedMultAdd += 0.25f;
-                    args.cooldownReductionAdd += 0.2f;
+                    args.baseHealthAdd += baseHealth + baseHealthPerLevel * (sender.level - 1f);
+                    args.armorAdd += armor;
+                    args.attackSpeedMultAdd += attackSpeed / 100f;
+                    args.moveSpeedMultAdd += moveSpeed / 100f;
+                    args.cooldownReductionAdd += cooldownReduction / 100f;
                 }
             }
         }
